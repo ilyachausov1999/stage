@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,40 +14,45 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-
-});
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-Route::get('/', function () {
-    return view('admin/login');
-});
-
 Route::get('/index', function () {
     return view('admin/index');
 });
 
-Route::get('/admin/viewUsers', function () {
-    return view('admin/viewUsers');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::prefix('admin')->group(function() {
+    Route::get('users', \App\Http\Controllers\UsersController::class. '@index')->name('users.index');
+    Route::get('user/create', \App\Http\Controllers\UsersController::class. '@create')->name('users.create');
+    Route::post('user/store', \App\Http\Controllers\UsersController::class. '@store')->name('users.store');
+//    Route::put('user/{id}/update')
 });
+//Route::get('/', function () {
+//    return view('welcome');
+//
+//});
 
-Route::get('/admin/createUser', function () {
-    return view('admin/createUser');
-});
+//Auth::routes();
 
-Route::get('/admin/viewCourses', function () {
-    return view('admin/viewCourses');
-});
+//Route::get('/', function () {
+//    return view('admin/login');
+//});
 
-Route::get('/admin/viewCourse', function () {
-    return view('admin/viewCourse');
-});
 
-Route::get('/admin/createCourse', function () {
-    return view('admin/createCourse');
-});
+//Route::get('/admin/viewUsers', function () {
+//    return view('admin/viewUsers');
+//});
+
+//Route::get('/admin/createUser', function () {
+//    return view('admin/createUser');
+//});
+
+//Route::get('/admin/viewCourses', function () {
+//    return view('admin/viewCourses');
+//});
+//
+//Route::get('/admin/viewCourse', function () {
+//    return view('admin/viewCourse');
+//});
+//
+//Route::get('/admin/createCourse', function () {
+//    return view('admin/createCourse');
+//});

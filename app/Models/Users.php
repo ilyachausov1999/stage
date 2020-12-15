@@ -18,7 +18,7 @@ class Users extends Model
         'name',
         'surname',
         'email',
-        'password',
+        'birthdate',
         'password',
         'role_id',
         'remember_token',
@@ -26,6 +26,10 @@ class Users extends Model
         'updated_at',
     ];
 
+    public function role()
+    {
+        return $this->belongsTo(Roles::class);
+    }
 
 
 

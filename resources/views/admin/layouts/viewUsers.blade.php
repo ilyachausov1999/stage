@@ -1,28 +1,26 @@
-
-
 <div class="container">
 
     <table class="table table-striped">
         <thead>
         <tr>
             <th>Login</th>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Birthdate</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
             <th>Email</th>
-            <th>Address</th>
+            <th>Роль</th>
+            <th>Аккаут создан:</th>
             <th>Actions</th>
         </tr>
+        @foreach ($users as $userView)
         </thead>
         <tbody>
-
         <tr>
-            <td>Login</td>
-            <td>Name</td>
-            <td>Surname</td>
-            <td>Birthdate</td>
-            <td>Email</td>
-            <td>Address</td>
+            <td>{{ $userView->login }}</td>
+            <td>{{ $userView->name }}</td>
+            <td>{{ $userView->surname }}</td>
+            <td>{{ $userView->email }}</td>
+            <td>{{ $userView->role->name }}</td>
+            <td>{{ $userView->created_at }}</td>
             <td>
                 <a href="" class="btn btn-sm btn-danger">Удалить</a>
                 <a href="" class="btn btn-sm btn-primary">Обновить</a>
@@ -38,8 +36,8 @@
                     </div>
             </td>
         </tr>
-
         </tbody>
+        @endforeach
     </table>
 
 </div>
