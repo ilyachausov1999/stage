@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,4 +50,11 @@ Route::get('/admin/viewCourse', function () {
 
 Route::get('/admin/createCourse', function () {
     return view('admin/createCourse');
+});
+
+//RegisterController
+Route::prefix('register')->group(function(){
+    Route::get('', 'App\Http\Controllers\RegistrationController@register')->name('register');
+    Route::post('', 'App\Http\Controllers\RegistrationController@postRegister')->name('register');
+    Route::get('/confirm/{token}', 'App\Http\Controllers\RegistrationController@confirmEmail')->name('confirmEmail');
 });
