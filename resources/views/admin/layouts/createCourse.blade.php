@@ -23,9 +23,8 @@
                     <label for="user-surname">Block</label>
                     <input name="surname" value="" class="form-control" id="user-surname">
 
-
-                <button class="btn btn-success">Отправить</button>
                 </div>
+                <button class="btn btn-success">Отправить</button>
             </form>
         </div>
     </div>

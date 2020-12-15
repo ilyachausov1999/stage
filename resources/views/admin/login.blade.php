@@ -1,6 +1,6 @@
 
 
 
-@extends('admin.layouts.navbar')
+@extends('auth.passwords.login')
 
 @extends('layouts.template')
