@@ -48,6 +48,7 @@ class UsersController extends Controller
             'surname' => 'required',
             'birthdate' => 'required',
             'email' => 'required',
+            'password' => 'required',
 
         ]);
         if ($validator->fails()) {
@@ -71,4 +72,59 @@ class UsersController extends Controller
         }
     }
 
+    public function destroy($id)
+    {
+
+        /**
+         * @var Users|null $user
+         */
+
+        $user = Users::query()->findOrFail($id);
+
+        $user->delete();
+
+        return redirect(route('users.index'));
+
+    }
+    public function edit($id)
+    {
+        $roles =DB::table('roles')
+            ->get();
+
+        $user = Users::query()->findOrFail($id);
+
+        return view('admin/updateUser', ['user' => $user, 'roles' => $roles]);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'login' => 'required|unique:users|max:255',
+            'name' => 'required',
+            'surname' => 'required',
+            'birthdate' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+
+        ]);
+        if ($validator->fails()) {
+            return redirect(Route('users.edit'))
+//            return view('admin/updateUser')
+                ->withErrors($validator);
+        } else {
+            /**
+             * @var Users|null $user
+             */
+            $user = Users::query()->findOrFail($id);
+            $user->login = $request->get('login');
+            $user->name = $request->get('name');
+            $user->surname = $request->get('surname');
+            $user->email = $request->get('email');
+            $user->birthdate = $request->get('birthdate');
+            $user->password = Hash::make($request->get('password'));
+            $user->save();
+            return redirect(Route('users.index'));
+        }
+    }
 }

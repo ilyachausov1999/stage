@@ -22,8 +22,14 @@
             <td>{{ $userView->role->name }}</td>
             <td>{{ $userView->created_at }}</td>
             <td>
-                <a href="" class="btn btn-sm btn-danger">Удалить</a>
-                <a href="" class="btn btn-sm btn-primary">Обновить</a>
+                @csrf
+                @method('DELETE')
+                <form method="post" action = "{{ route('users.delete', $userView->id) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button  onclick="return confirm('Вы уверены, что хотите удалить пользователя?')" class="btn btn-sm btn-danger">Удалить</button>
+                </form>
+                <a href="{{ route('users.update', $userView->id) }}" class="btn btn-sm btn-primary">Обновить</a>
                     <div class="dropdown">
                         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Назначить курс

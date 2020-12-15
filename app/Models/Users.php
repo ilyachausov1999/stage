@@ -7,6 +7,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Users
+ * @package App\Models
+ * @property string $login
+ * @property string $surname
+ * @property string $name
+ * @property string $birthdate
+ * @property string $email
+ * @property string $table
+ * @property string $password
+ *
+ */
+
 class Users extends Model
 {
     use HasFactory;
