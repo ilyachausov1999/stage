@@ -10,7 +10,7 @@
             <input name="name" class="form-control" value="{{$data->name}}">
         </div>
         @include('errors.errors')
-        <input type="submit" name="submit" value="Сохранить" class="btn btn-success">
+        <input type="submit" name="submit" value="Сохранить" class="btn btn-primary btn-lg">
     </form>
 </div>
 @endsection
