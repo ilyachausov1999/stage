@@ -24,9 +24,10 @@
             <td>Email</td>
             <td>Address</td>
             <td>
+                <div class="dropdown">
                 <a href="" class="btn btn-sm btn-danger">Удалить</a>
                 <a href="" class="btn btn-sm btn-primary">Обновить</a>
-                    <div class="dropdown">
+
                         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Назначить курс
                         </button>
