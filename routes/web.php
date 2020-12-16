@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-
 });
 
 Auth::routes();
@@ -50,3 +50,28 @@ Route::get('/admin/viewCourse', function () {
 Route::get('/admin/createCourse', function () {
     return view('admin/createCourse');
 });
+
+//RegisterController
+Route::prefix('register')->group(function () {
+    Route::get('', 'App\Http\Controllers\RegistrationController@register')->name('register');
+    Route::post('', 'App\Http\Controllers\RegistrationController@postRegister')->name('post-register');
+    Route::get('/confirm/{token}', 'App\Http\Controllers\RegistrationController@confirmEmail')->name('confirmEmail');
+});
+
+//CoursesController
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('/admin/courses')->group(function () {
+        Route::name('courses-')->group(function () {
+            Route::get('/create', 'App\Http\Controllers\Admin\CoursesController@create')->name('create');
+            Route::post('/{id}/update', 'App\Http\Controllers\Admin\CoursesController@update')->name('update');
+            Route::get('/{id}/edit', 'App\Http\Controllers\Admin\CoursesController@edit')->name('edit');
+            Route::get('/{id}/delete', 'App\Http\Controllers\Admin\CoursesController@delete')->name('delete');
+            Route::get('/{id}/view', 'App\Http\Controllers\Admin\CoursesController@view')->name('view');
+            Route::post('/submit', 'App\Http\Controllers\Admin\CoursesController@submit')->name('submit');
+            Route::get('/all', 'App\Http\Controllers\Admin\CoursesController@getAll')->name('all');
+        });
+    });
+});
+// Route::middleware(['auth'])->prefix('admin/courses')->name('courses-')->group(function () {
+//     Route::resource('/all', 'App\Http\Controllers\Admin\CoursesController@getAll')->name('all');
+// });
