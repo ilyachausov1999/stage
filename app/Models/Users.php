@@ -3,7 +3,6 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $email
  * @property string $table
  * @property string $password
+ * @property string $role_id
  *
  */
 
@@ -43,9 +43,4 @@ class Users extends Model
     {
         return $this->belongsTo(Roles::class);
     }
-
-
-
-
-
 }

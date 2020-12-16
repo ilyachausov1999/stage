@@ -88,10 +88,10 @@ class UsersController extends Controller
     }
     public function edit($id)
     {
+        $user = Users::query()->findOrFail($id);
+
         $roles =DB::table('roles')
             ->get();
-
-        $user = Users::query()->findOrFail($id);
 
         return view('admin/updateUser', ['user' => $user, 'roles' => $roles]);
 
@@ -99,6 +99,8 @@ class UsersController extends Controller
 
     public function update(Request $request, $id)
     {
+        $user = Users::query()->findOrFail($id);
+
         $validator = Validator::make($request->all(), [
             'login' => 'required|unique:users|max:255',
             'name' => 'required',
@@ -108,9 +110,9 @@ class UsersController extends Controller
             'password' => 'required',
 
         ]);
+
         if ($validator->fails()) {
-            return redirect(Route('users.edit'))
-//            return view('admin/updateUser')
+            return redirect(Route('users.edit', $user))
                 ->withErrors($validator);
         } else {
             /**
@@ -123,6 +125,7 @@ class UsersController extends Controller
             $user->email = $request->get('email');
             $user->birthdate = $request->get('birthdate');
             $user->password = Hash::make($request->get('password'));
+            $user->role_id = $request->get('role');
             $user->save();
             return redirect(Route('users.index'));
         }

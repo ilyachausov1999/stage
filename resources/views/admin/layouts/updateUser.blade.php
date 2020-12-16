@@ -1,9 +1,7 @@
-
 <div class="container">
     <div class="card">
         <div class="card-body">
             @if ($errors->any())
-                {{dd($errors)}}
                 <div class="error_form">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -73,4 +71,3 @@
         </div>
     </div>
 </div>
-
