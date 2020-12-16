@@ -1,34 +1,37 @@
-
-
 <div class="container">
 
     <table class="table table-striped">
         <thead>
         <tr>
             <th>Login</th>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Birthdate</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
             <th>Email</th>
-            <th>Address</th>
+            <th>Роль</th>
+            <th>Аккаут создан:</th>
             <th>Actions</th>
         </tr>
+        @foreach ($users as $userView)
         </thead>
         <tbody>
-
         <tr>
-            <td>Login</td>
-            <td>Name</td>
-            <td>Surname</td>
-            <td>Birthdate</td>
-            <td>Email</td>
-            <td>Address</td>
+            <td>{{ $userView->login }}</td>
+            <td>{{ $userView->name }}</td>
+            <td>{{ $userView->surname }}</td>
+            <td>{{ $userView->email }}</td>
+            <td>{{ $userView->role->name }}</td>
+            <td>{{ $userView->created_at }}</td>
             <td>
-                <div class="dropdown">
-                <a href="" class="btn btn-sm btn-danger col-md-4">Удалить</a>
-                <a href="" class="btn btn-sm btn-primary col-md-4">Обновить</a>
-
-                        <button class="btn btn-sm btn-success dropdown-toggle col-md-4" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @csrf
+                @method('DELETE')
+                <form method="post" action = "{{ route('users.delete', $userView->id) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button  onclick="return confirm('Вы уверены, что хотите удалить пользователя?')" class="btn btn-sm btn-danger">Удалить</button>
+                </form>
+                <a href="{{ route('users.update', $userView->id) }}" class="btn btn-sm btn-primary">Обновить</a>
+                    <div class="dropdown">
+                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Назначить курс
                         </button>
                             <div class="dropdown-menu">
@@ -39,8 +42,8 @@
                     </div>
             </td>
         </tr>
-
         </tbody>
+        @endforeach
     </table>
 
 </div>

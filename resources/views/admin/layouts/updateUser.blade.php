@@ -1,4 +1,3 @@
-
 <div class="container">
     <div class="card">
         <div class="card-body">
@@ -11,35 +10,36 @@
                     </ul>
                 </div>
             @endif
-            <form enctype="multipart/form-data" action="{{ route('users.store') }}" method="POST">
-                @csrf
+                <form action="{{ route('users.update', $user->id) }}" method="POST" class="form" enctype="multipart/form-data" >
+                    @csrf
+                    @method('PUT')
 
                 <div class="form-group">
                     <label for="user-login">Логин</label>
                     <p>*это поле является обязательным</p>
-                    <input name="login" value="{{old('login')}}" class="form-control " id="user-login">
+                    <input name="login" value="{{$user['login']}}" class="form-control " id="user-login">
 
                 </div>
                 <div class="form-group">
                     <label for="user-name">Имя</label>
                     <p>*это поле является обязательным</p>
-                    <input name="name" value="{{old('name')}}" class="form-control " id="user-name">
+                    <input name="name" value="{{$user['name']}}" class="form-control " id="user-name">
 
                 </div>
                 <div class="form-group">
                     <label for="user-surname">Фамилия</label>
-                    <input name="surname" value="{{old('surname')}}" class="form-control" id="user-surname">
+                    <input name="surname" value="{{$user['surname']}}" class="form-control" id="user-surname">
 
                 </div>
                 <div class="form-group">
                     <label for="user-birthdate">Дата рождения</label>
                     <p>*это поле является обязательным</p>
-                    <input type="date" name="birthdate" value="{{old('birthdate')}}" class="form-control " id="user-birthdate">
+                    <input type="date" name="birthdate" value="{{$user['birthdate']}}" class="form-control " id="user-birthdate">
 
                 </div>
                 <div class="form-group">
                     <label for="user-email">Email</label>
-                    <input name="email" value="{{old('email')}}" class="form-control" id="user-email">
+                    <input name="email" value="{{$user['email']}}" class="form-control" id="user-email">
 
                 </div>
 
@@ -71,4 +71,3 @@
         </div>
     </div>
 </div>
-
