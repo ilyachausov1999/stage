@@ -14,13 +14,6 @@ class CoursesController extends Controller
 {
     use ValidatesRequests;
 
-    public function index()
-    {
-        $courses = Courses::all();
-        $courseItems = CourseItems::all();
-        return view('admin.courses.courses', compact('courses','courseItems'));
-    }
-
     public function create()
     {
         return view('admin.courses.create');
@@ -45,7 +38,8 @@ class CoursesController extends Controller
         return view('admin.courses.edit', ['data' => $course]);
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         Courses::find($id)->delete();
         return redirect()->route('courses-all');
     }

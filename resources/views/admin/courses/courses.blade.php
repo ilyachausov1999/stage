@@ -2,32 +2,25 @@
 
 @section('content')
 <div class="container">
-    <h3>Курсы для обучения: </h3>
-    @if(count($course))
-    <div class="row justify-content-center">
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Курс</th>
-                    <th>Редактировать/Удалить</th>
-                </tr>
-            </thead>
-            @foreach($course as $value)
-            <tr>
-                <td>{{ $value->id }}</td>
-                <td>{{ $value->name }}</td>
-                <td>
-                    <a href="{{ route('courses-view', $value->id) }}" class="btn btn-success">Просмотр</a>
-                    <a href="{{ route('courses-edit', $value->id) }}" class="btn btn-info">Изменить</a>
-                    <a href="{{ route('courses-delete', $value->id) }}" class="btn btn-danger">Удалить</a>
-                </td>
-            </tr>
-            @endforeach
-        </table>
-        <a class="btn btn-info" name="save" href="{{ route('courses-create') }}">Добавить</a>
+    <div class="text-center">
+        <h1>Курсы для обучения: </h1>
+        <a class="btn btn-primary btn-lg" name="save" href="{{ route('courses-create') }}">Добавить</a>
+        @if(count($course))
+        @foreach($course as $value)
+        <div class="text-center">
+        <a href="{{ route('courses-view', $value->id) }}"><img src="..." class="rounded" alt="..."></a>
+            <h3>{{ $value->name }}</h3>
+            <div class="center">
+                <a href="{{ route('courses-edit', $value->id) }}" class="btn btn-primary btn-lg">Изменить</a>
+                <a href="{{ route('courses-delete', $value->id) }}" class="btn btn-secondary btn-lg">Удалить</a>
+            </div>
+        </div>
+        @endforeach
+
     </div>
-    {{ $course->links() }}
+    <div class="text-right">
+        {{ $course->links() }}
+    </div>
     @endif
 </div>
 @endsection
