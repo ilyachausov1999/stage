@@ -13,7 +13,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
 
-        <title></title>
+        <title>@yield('title')</title>
     </head>
 
     <body>
@@ -63,6 +63,8 @@
                 </ul>
             </div>
         </nav>
-
+    <div>
+        @yield('content')
+    </div>
     </body>
 </html>
