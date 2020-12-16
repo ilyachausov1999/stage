@@ -15,7 +15,7 @@ class AddBirthdateUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
 
-            $table->timestamp('birthdate')->after('email');
+            $table->timestamp('birthdate')->after('email')->nullable();
 
         });
     }
