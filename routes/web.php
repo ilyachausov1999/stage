@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,20 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/', function () {
+    return view('welcome');
+
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('/', function () {
+    return view('admin/login');
+});
 
 Route::get('/index', function () {
     return view('admin/index');
@@ -28,4 +43,12 @@ Route::prefix('admin')->group(function() {
     Route::put('user/{id}/update', \App\Http\Controllers\UsersController::class. '@update')->name('users.update');
 
 
+});
+
+Route::get('/admin/viewCourse', function () {
+    return view('admin/viewCourse');
+});
+
+Route::get('/admin/createCourse', function () {
+    return view('admin/createCourse');
 });
