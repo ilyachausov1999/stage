@@ -31,6 +31,10 @@ Route::get('/index', function () {
     return view('admin/index');
 });
 
+//роут для контента
+Route::resource('content', 'App\Http\Controllers\CourseItemsController');
+
+
 Route::get('/admin/viewUsers', function () {
     return view('admin/viewUsers');
 });
