@@ -12,5 +12,7 @@
         @include('errors.errors')
         <input type="submit" name="submit" value="Сохранить" class="btn btn-success">
     </form>
+
+{{--    @extends('admin/courses/content-blocks')--}}
 </div>
 @endsection

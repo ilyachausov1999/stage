@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\createCoursesRequest;
+use App\Models\CourseItems;
 use App\Models\Courses;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Http\Controllers\CourseItemsController;
 
 class CoursesController extends Controller
 {
@@ -15,7 +17,8 @@ class CoursesController extends Controller
     public function index()
     {
         $courses = Courses::all();
-        return view('admin.courses.courses', compact('courses'));
+        $courseItems = CourseItems::all();
+        return view('admin.courses.courses', compact('courses','courseItems'));
     }
 
     public function create()

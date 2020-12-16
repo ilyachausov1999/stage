@@ -11,6 +11,7 @@ class CourseItems extends Model
 {
     use HasFactory;
 
+    public $table = 'course_items';
     protected $fillable =
         [
             'description',
