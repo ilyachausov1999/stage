@@ -13,6 +13,7 @@
             <div class="center">
                 <a href="{{ route('courses-edit', $value->id) }}" class="btn btn-primary btn-lg">Изменить</a>
                 <a href="{{ route('courses-delete', $value->id) }}" class="btn btn-secondary btn-lg">Удалить</a>
+                <a href="{{ route('courses-index', $value->id) }}" class="btn btn-secondary btn-lg">Добавить блок</a>
             </div>
         </div>
         @endforeach

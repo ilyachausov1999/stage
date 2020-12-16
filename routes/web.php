@@ -73,9 +73,15 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{id}/view', 'App\Http\Controllers\Admin\CoursesController@view')->name('view');
             Route::post('/submit', 'App\Http\Controllers\Admin\CoursesController@submit')->name('submit');
             Route::get('', 'App\Http\Controllers\Admin\CoursesController@getAll')->name('all');
+            Route::get('{id}/content-blocks', 'App\Http\Controllers\CourseItemsController@index')->name('index');
         });
     });
 });
+
+//Route::middleware()
+//Route::post('/admin/courses/{id}/edit/content', 'App\Http\Controllers\CourseItemsController@index')->name('index');
+
+
 // Route::middleware(['auth'])->prefix('admin/courses')->name('courses-')->group(function () {
 //     Route::resource('/all', 'App\Http\Controllers\Admin\CoursesController@getAll')->name('all');
 // });

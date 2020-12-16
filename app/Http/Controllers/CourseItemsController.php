@@ -9,8 +9,8 @@ class CourseItemsController extends Controller
 {
     public function index()
     {
-        $courseItems = CourseItems::all();
-        return view('CourseItems.content', compact('courseItems'));
+        $courseItems = CourseItems::query()->with('course')->get();
+        return view('admin/courses/content-blocks', compact('courseItems'));
     }
 
     public function store(Request $request)
