@@ -72,7 +72,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{id}/delete', 'App\Http\Controllers\Admin\CoursesController@delete')->name('delete');
             Route::get('/{id}/view', 'App\Http\Controllers\Admin\CoursesController@view')->name('view');
             Route::post('/submit', 'App\Http\Controllers\Admin\CoursesController@submit')->name('submit');
-            Route::get('/all', 'App\Http\Controllers\Admin\CoursesController@getAll')->name('all');
+            Route::get('', 'App\Http\Controllers\Admin\CoursesController@getAll')->name('all');
         });
     });
 });
