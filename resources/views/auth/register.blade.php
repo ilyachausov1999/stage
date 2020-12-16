@@ -7,6 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Регистрация') }}</div>
                 <div class="card-body">
+                    @include('flash')
                     <form method="POST" action='{{ url("register/") }}'>
                         {!! csrf_field() !!}
                         <div class="form-group row">
@@ -32,8 +33,8 @@
                         @include('errors.errors')
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-                        </div>
+                                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -41,4 +42,4 @@
         </div>
     </div>
 </div>
-    @endsection
+@endsection
