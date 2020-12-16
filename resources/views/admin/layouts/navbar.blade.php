@@ -2,8 +2,8 @@
     <ul class="nav">
         <li><a href="{{ route('users.index') }}">Просмотр пользователей</a></li>
         <li><a href="{{ route('users.create') }}">Добавить пользователя</a></li>
-        <li><a href="">Просмотр курсов</a></li>
-        <li><a href="">Добавить курс</a></li>
+        <li><a href="{{ route('courses-all') }}">Просмотр курсов</a></li>
+        <li><a href="{{ route('courses-create') }}">Добавить курс</a></li>
     </ul>
 </div>
 

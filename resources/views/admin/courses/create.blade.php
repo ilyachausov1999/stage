@@ -1,6 +1,4 @@
-@extends('layouts.app')
 
-@section('content')
 <div class="container">
     <h3>Добавление курса</h3>
     <form action="/admin/courses/submit" method="POST" enctype="multipart/form-data">
@@ -17,4 +15,3 @@
         <input type="submit" name="submit" value="Сохранить" class="btn btn-primary btn-lg">
     </form>
 </div>
-@endsection

@@ -14,7 +14,7 @@ class CoursesController extends Controller
 
     public function create()
     {
-        return view('admin.courses.create');
+        return view('admin.createCourse');
     }
 
     public function submit(createCoursesRequest $req)
@@ -26,14 +26,14 @@ class CoursesController extends Controller
     public function getAll()
     {
         $course = Courses::simplePaginate(5);
-        return view('admin.courses.courses', compact('course'));
+        return view('admin.viewCourses', compact('course'));
     }
 
     public function edit($id)
     {
         $course = Courses::find($id);
 
-        return view('admin.courses.edit', ['data' => $course]);
+        return view('admin.editCourse', ['data' => $course]);
     }
 
     public function delete($id)
