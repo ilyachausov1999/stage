@@ -25,25 +25,15 @@ class CoursesController extends Controller
             'name'     =>  'required',
             'image'         =>  'image|max:2048'
         ]);
-
-        if ($image = $req->file('image')) {
-            $filename  = Str::random(6) . '.' . $image->getClientOriginalExtension();
-            $path = public_path('/storage' . $filename);
-            $resizedImage = Courses::make($image->getRealPath())->resize(200, 200)->save($path);
-            Storage::put('/storage' . $filename,  $resizedImage);
-
-            // $image = $req->file('image');
-            // $file = rand() . '.' . $image->getClientOriginalExtension();
-            // $image->move(public_path('/storage'), $file);
-            $data = array(
-                'name'    =>   $req->name,
-                'image'   =>   $filename
-            );
-
-            Courses::create($data);
-
-            return redirect()->route('courses-all');
-        }
+        $image = $req->file('image');
+        $filename = rand() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('storage'), $filename);
+        $data = array(
+            'name'    =>   $req->name,
+            'image'   =>   $filename
+        );
+        Courses::create($data);
+        return redirect()->route('courses-all');
     }
 
     public function getAll()
@@ -80,9 +70,8 @@ class CoursesController extends Controller
                 'name'   =>  'required',
                 'image'  =>  'image|max:2048'
             ]);
-
             $file = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('/storage'), $file);
+            $image->move(public_path('storage'), $file);
         } else {
             $req->validate([
                 'name'   =>  'required',
