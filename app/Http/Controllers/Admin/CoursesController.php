@@ -7,6 +7,8 @@ use App\Http\Requests\createCoursesRequest;
 use App\Models\Courses;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CoursesController extends Controller
 {
@@ -24,18 +26,24 @@ class CoursesController extends Controller
             'image'         =>  'image|max:2048'
         ]);
 
-        $image = $req->file('image');
+        if ($image = $req->file('image')) {
+            $filename  = Str::random(6) . '.' . $image->getClientOriginalExtension();
+            $path = public_path('/storage' . $filename);
+            $resizedImage = Courses::make($image->getRealPath())->resize(200, 200)->save($path);
+            Storage::put('/storage' . $filename,  $resizedImage);
 
-        $file = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('/storage'), $file);
-        $data = array(
-            'name'    =>   $req->name,
-            'image'   =>   $file
-        );
+            // $image = $req->file('image');
+            // $file = rand() . '.' . $image->getClientOriginalExtension();
+            // $image->move(public_path('/storage'), $file);
+            $data = array(
+                'name'    =>   $req->name,
+                'image'   =>   $filename
+            );
 
-        Courses::create($data);
+            Courses::create($data);
 
-        return redirect()->route('courses-all');
+            return redirect()->route('courses-all');
+        }
     }
 
     public function getAll()
