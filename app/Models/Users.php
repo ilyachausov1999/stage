@@ -19,7 +19,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $role_id
  *
  */
-
 class Users extends Model
 {
     use HasFactory;
