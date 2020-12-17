@@ -43,4 +43,9 @@ class Users extends Model
     {
         return $this->belongsTo(Roles::class);
     }
+
+    public function course()
+    {
+        return $this->hasMany(Courses::class);
+    }
 }
