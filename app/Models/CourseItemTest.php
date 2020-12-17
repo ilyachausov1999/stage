@@ -2,9 +2,15 @@
 
 
 namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
 
-
-class CourseItemTest
+class CourseItemTest extends Model
 {
 
+    public $table = 'tests';
+    protected $fillable =
+    [
+        'test_name',
+        'course_id'
+    ];
 }

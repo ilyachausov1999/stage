@@ -45,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('', 'App\Http\Controllers\Admin\CoursesController@getAll')->name('all');
             Route::get('{id}/content-blocks', 'App\Http\Controllers\CourseItemsController@index')->name('index');
             Route::post('{id}/content-blocks', 'App\Http\Controllers\CourseItemsController@store')->name('store');
+            Route::post('{id}/content-blocks-test', 'App\Http\Controllers\CourseItemsController@testStore')->name('testStore');
         });
     });
 });
