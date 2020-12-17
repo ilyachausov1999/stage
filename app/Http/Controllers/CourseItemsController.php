@@ -7,28 +7,29 @@ use App\Models\CourseItems;
 
 class CourseItemsController extends Controller
 {
-    public function index()
+    public function index(int $id)
     {
-        $courseItems = CourseItems::query()->with('course')->get();
-        return view('admin/courses/content-blocks', compact('courseItems'));
+        $courseItems = CourseItems::query()->with('course')->where('course_id', $id)->get();
+        return view('admin/courses/content-blocks',['courseItems' => $courseItems, 'id' => $id ] );
     }
 
-    public function store(Request $request)
+    public function store(Request $request, int $id)
     {
+
         $request->validate([
             'description' => 'required',
             'text' => 'required',
         ]);
 
-        $courceItem = new CourseItems([
+        $courseItem = new CourseItems([
             'description' => $request->get('description'),
             'text' => $request->get('text'),
-            'course_id' => $request->get('course_id'),
+            'course_id' => $id,
         ]);
 
-        $courceItem->save();
+        $courseItem->save();
 
-        return redirect('/content');
+       return redirect(Route('courses-index', $id));
 
     }
 
