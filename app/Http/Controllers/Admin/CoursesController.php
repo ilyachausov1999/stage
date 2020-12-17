@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\createCoursesRequest;
 use App\Models\Courses;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+
 
 class CoursesController extends Controller
 {
@@ -14,26 +16,46 @@ class CoursesController extends Controller
 
     public function create()
     {
-        return view('admin.courses.create');
+        return view('admin.createCourse');
     }
 
     public function submit(createCoursesRequest $req)
     {
-        Courses::create($req->all());
-        return redirect()->route('courses-all');
+        $req->validate([
+            'name'     =>  'required|string|min:1|max:255',
+            'image'         =>  'required|image|max:2048'
+        ]);
+
+        /**
+         * @var UploadedFile $image
+         */
+        if ($image = $req->file('image')) {
+           // $resizedImage = Courses::make($image->getRealPath())->resize(200, 200)->save($path);
+            $path = Storage::put('', $image);
+
+            Courses::query()->create([
+                'name'    =>   $req->name,
+                'image'   =>   $path
+            ]);
+
+            return redirect()->route('courses-all');
+        }
     }
 
     public function getAll()
     {
-        $course = Courses::simplePaginate(5);
-        return view('admin.courses.courses', compact('course'));
+        /**
+         * @todo rodia сделай пагинацию
+         */
+        $course = Courses::simplePaginate(999);
+        return view('admin.viewCourses', compact('course'));
     }
 
     public function edit($id)
     {
         $course = Courses::find($id);
 
-        return view('admin.courses.edit', ['data' => $course]);
+        return view('admin.editCourse', ['data' => $course]);
     }
 
     public function delete($id)
@@ -50,9 +72,25 @@ class CoursesController extends Controller
 
     public function update(createCoursesRequest $req, $id)
     {
-        $course = Courses::find($id);
-        $course->fill($req->all());
-        $course->save();
+        $file = $req->hidden_image;
+        $image = $req->file('image');
+        if ($image != '') {
+            $req->validate([
+                'name'   =>  'required',
+                'image'  =>  'image|max:2048'
+            ]);
+
+            $path = Storage::put('', $image);
+        } else {
+            $req->validate([
+                'name'   =>  'required',
+            ]);
+        }
+        $data = array(
+            'name'       =>   $req->name,
+            'image'      =>   $path
+        );
+        Courses::whereId($id)->update($data);
         return redirect()->route('courses-all');
     }
 }

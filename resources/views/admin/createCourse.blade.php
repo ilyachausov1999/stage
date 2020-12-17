@@ -1,6 +1,6 @@
 
 
-@extends('admin.layouts.createCourse')
+@extends('admin.courses.create')
 
 @extends('admin.layouts.navbar')
 

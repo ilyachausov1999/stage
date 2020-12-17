@@ -10,7 +10,7 @@ class Courses extends Model
     use HasFactory;
     public $table = 'courses';
     protected $fillable =
-        [
-            'name', 'image'
-        ];
+    [
+        'name', 'image'
+    ];
 }

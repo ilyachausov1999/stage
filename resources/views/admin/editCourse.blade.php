@@ -1,7 +1,4 @@
-
-
-
-@extends('admin.layouts.viewCourses')
+@extends('admin.courses.edit')
 
 @extends('admin.layouts.navbar')
 

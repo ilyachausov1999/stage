@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class CourseItems extends Model
 {
     use HasFactory;
+
     public $table = 'course_items';
     protected $fillable =
         [

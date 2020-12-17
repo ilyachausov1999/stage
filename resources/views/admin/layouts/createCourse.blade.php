@@ -1,9 +1,6 @@
-
 <div class="container">
     <div class="card">
         <div class="card-body">
-
-
             <form method="POST" enctype="multipart/form-data" action="">
                 @csrf
 
@@ -23,9 +20,8 @@
                     <label for="user-surname">Block</label>
                     <input name="surname" value="" class="form-control" id="user-surname">
 
-
-                <button class="btn btn-success">Отправить</button>
                 </div>
+                <button class="btn btn-success">Отправить</button>
             </form>
         </div>
     </div>
