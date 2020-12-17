@@ -12,7 +12,6 @@
             <input type="file" name="image" class="form-control" value="{{$data->name}}">
         </div>
         @include('errors.errors')
-{{--        <input type="submit" name="submit" value="Изменить" class="btn btn-primary btn-lg">--}}
         <input type="submit" name="submit" value="Сохранить" class="btn btn-primary btn-lg">
 
     </form>
