@@ -27,7 +27,7 @@ class CoursesController extends Controller
         $image = $req->file('image');
 
         $file = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $file);
+        $image->move(public_path('/home/intern/site/public/images'), $file);
         $data = array(
             'name'    =>   $req->name,
             'image'   =>   $file
