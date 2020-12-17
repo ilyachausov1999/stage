@@ -1,9 +1,6 @@
-
 <div class="container">
     <div class="card">
         <div class="card-body">
-
-
             <form method="POST" enctype="multipart/form-data" action="">
                 @csrf
 

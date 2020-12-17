@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\createCoursesRequest;
 use App\Models\Courses;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -22,23 +23,31 @@ class CoursesController extends Controller
     public function submit(createCoursesRequest $req)
     {
         $req->validate([
-            'name'     =>  'required',
-            'image'         =>  'image|max:2048'
+            'name'     =>  'required|string|min:1|max:255',
+            'image'         =>  'required|image|max:2048'
         ]);
-        $image = $req->file('image');
-        $filename = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('storage'), $filename);
-        $data = array(
-            'name'    =>   $req->name,
-            'image'   =>   $filename
-        );
-        Courses::create($data);
-        return redirect()->route('courses-all');
+        /**
+         * @var UploadedFile $image
+         */
+        if ($image = $req->file('image')) {
+           // $resizedImage = Courses::make($image->getRealPath())->resize(200, 200)->save($path);
+            $path = Storage::put('image/', $image);
+
+            Courses::query()->create([
+                'name'    =>   $req->name,
+                'image'   =>   $path
+            ]);
+
+            return redirect()->route('courses-all');
+        }
     }
 
     public function getAll()
     {
-        $course = Courses::simplePaginate(5);
+        /**
+         * @todo rodia сделай пагинацию
+         */
+        $course = Courses::simplePaginate(999);
         return view('admin.viewCourses', compact('course'));
     }
 
@@ -70,8 +79,7 @@ class CoursesController extends Controller
                 'name'   =>  'required',
                 'image'  =>  'image|max:2048'
             ]);
-            $file = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('storage'), $file);
+            $path = Storage::put('image/', $image);
         } else {
             $req->validate([
                 'name'   =>  'required',
@@ -79,7 +87,7 @@ class CoursesController extends Controller
         }
         $data = array(
             'name'       =>   $req->name,
-            'image'      =>   $file
+            'image'      =>   $path
         );
         Courses::whereId($id)->update($data);
         return redirect()->route('courses-all');
