@@ -7,7 +7,6 @@
         @if(count($course))
         @foreach($course as $value)
         <div class="text-center">
-           {{ dump($value->getImageUrl()) }}
         <a href="{{ route('courses-view', $value->id) }}"><img src="{{ $value->getImageUrl() }}" class="rounded" width='200' height='200'></a>
             <h3>{{ $value->name }}</h3>
             <div class="center">
