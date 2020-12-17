@@ -27,7 +27,7 @@ class CoursesController extends Controller
         $image = $req->file('image');
 
         $file = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('/home/intern/site/public/images'), $file);
+        $image->move(public_path('images'), $file);
         $data = array(
             'name'    =>   $req->name,
             'image'   =>   $file
@@ -66,7 +66,7 @@ class CoursesController extends Controller
     public function update(createCoursesRequest $req, $id)
     {
         $file = $req->hidden_image;
-        $image = $req->file('/home/intern/site/public/images');
+        $image = $req->file('image');
         if ($image != '') {
             $req->validate([
                 'name'   =>  'required',
