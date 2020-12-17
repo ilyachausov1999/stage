@@ -1,4 +1,6 @@
 
-@extends('admin.layouts.login')
+
+
+@extends('auth.passwords.login')
 
 @extends('layouts.template')

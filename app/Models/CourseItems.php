@@ -18,4 +18,9 @@ class CourseItems extends Model
             'text',
             'course_id'
         ];
+
+    public function course()
+    {
+        return $this->belongsTo(Courses::class);
+    }
 }
