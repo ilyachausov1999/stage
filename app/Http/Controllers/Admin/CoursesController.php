@@ -32,7 +32,7 @@ class CoursesController extends Controller
          */
         if ($image = $req->file('image')) {
            // $resizedImage = Courses::make($image->getRealPath())->resize(200, 200)->save($path);
-            $path = Storage::put('image/', $image);
+            $path = Storage::put('', $image);
 
             Courses::query()->create([
                 'name'    =>   $req->name,
@@ -81,7 +81,7 @@ class CoursesController extends Controller
                 'image'  =>  'image|max:2048'
             ]);
 
-            $path = Storage::put('image/', $image);
+            $path = Storage::put('', $image);
         } else {
             $req->validate([
                 'name'   =>  'required',

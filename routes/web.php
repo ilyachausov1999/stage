@@ -61,26 +61,6 @@ Route::prefix('admin')->group(function () {
     Route::resource('content', 'App\Http\Controllers\CourseItemsController');
 
 
-//Route::get('/admin/viewUsers', function () {
-//    return view('admin/viewUsers');
-//});
-//
-//Route::get('/admin/createUser', function () {
-//    return view('admin/createUser');
-//});
-//
-//Route::get('/admin/viewCourses', function () {
-//    return view('admin/viewCourses');
-//});
-//
-//Route::get('/admin/viewCourse', function () {
-//    return view('admin/viewCourse');
-//});
-//
-//Route::get('/admin/createCourse', function () {
-//    return view('admin/createCourse');
-//});
-
 //RegisterController
     Route::prefix('register')->group(function () {
         Route::get('', 'App\Http\Controllers\RegistrationController@register')->name('register');
@@ -89,6 +69,7 @@ Route::prefix('admin')->group(function () {
     });
 });
 
+Route::get('file/{filePath?}', \App\Http\Controllers\FileController::class . '@getFile')->name('file.get');
 //CoursesController
 
 

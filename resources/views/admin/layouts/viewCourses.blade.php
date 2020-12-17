@@ -1,5 +1,3 @@
-
-
 <div class="container">
 
     <table class="table table-striped">

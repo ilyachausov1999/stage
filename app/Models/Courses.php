@@ -21,9 +21,4 @@ class Courses extends Model
     [
         'name', 'image'
     ];
-
-    public function getImageUrl(): string
-    {
-        return Storage::url($this->image);
-    }
 }
