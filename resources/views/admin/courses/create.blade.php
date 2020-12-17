@@ -9,7 +9,7 @@
         </div>
         <div class="form-group">
             <label>Изображение</label>
-            <input type="file" name="image" class="form-control" >
+            <input type="file" name="image" class="form-control">
         </div>
         @include('errors.errors')
         <input type="submit" name="submit" value="Сохранить" class="btn btn-primary btn-lg">

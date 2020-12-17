@@ -19,7 +19,22 @@ class CoursesController extends Controller
 
     public function submit(createCoursesRequest $req)
     {
-        Courses::create($req->all());
+        $req->validate([
+            'name'     =>  'required',
+            'image'         =>  'image|max:2048'
+        ]);
+
+        $image = $req->file('image');
+
+        $file = rand() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $file);
+        $data = array(
+            'name'    =>   $req->name,
+            'image'   =>   $file
+        );
+
+        Courses::create($data);
+
         return redirect()->route('courses-all');
     }
 
@@ -50,9 +65,26 @@ class CoursesController extends Controller
 
     public function update(createCoursesRequest $req, $id)
     {
-        $course = Courses::find($id);
-        $course->fill($req->all());
-        $course->save();
+        $file = $req->hidden_image;
+        $image = $req->file('image');
+        if ($image != '') {
+            $req->validate([
+                'name'   =>  'required',
+                'image'  =>  'image|max:2048'
+            ]);
+
+            $file = rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $file);
+        } else {
+            $req->validate([
+                'name'   =>  'required',
+            ]);
+        }
+        $data = array(
+            'name'       =>   $req->name,
+            'image'      =>   $file
+        );
+        Courses::whereId($id)->update($data);
         return redirect()->route('courses-all');
     }
 }
