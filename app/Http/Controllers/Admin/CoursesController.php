@@ -14,26 +14,41 @@ class CoursesController extends Controller
 
     public function create()
     {
-        return view('admin.courses.create');
+        return view('admin.createCourse');
     }
 
     public function submit(createCoursesRequest $req)
     {
-        Courses::create($req->all());
+        $req->validate([
+            'name'     =>  'required',
+            'image'         =>  'image|max:2048'
+        ]);
+
+        $image = $req->file('image');
+
+        $file = rand() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('/storage'), $file);
+        $data = array(
+            'name'    =>   $req->name,
+            'image'   =>   $file
+        );
+
+        Courses::create($data);
+
         return redirect()->route('courses-all');
     }
 
     public function getAll()
     {
         $course = Courses::simplePaginate(5);
-        return view('admin.courses.courses', compact('course'));
+        return view('admin.viewCourses', compact('course'));
     }
 
     public function edit($id)
     {
         $course = Courses::find($id);
 
-        return view('admin.courses.edit', ['data' => $course]);
+        return view('admin.editCourse', ['data' => $course]);
     }
 
     public function delete($id)
@@ -50,9 +65,26 @@ class CoursesController extends Controller
 
     public function update(createCoursesRequest $req, $id)
     {
-        $course = Courses::find($id);
-        $course->fill($req->all());
-        $course->save();
+        $file = $req->hidden_image;
+        $image = $req->file('image');
+        if ($image != '') {
+            $req->validate([
+                'name'   =>  'required',
+                'image'  =>  'image|max:2048'
+            ]);
+
+            $file = rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('/storage'), $file);
+        } else {
+            $req->validate([
+                'name'   =>  'required',
+            ]);
+        }
+        $data = array(
+            'name'       =>   $req->name,
+            'image'      =>   $file
+        );
+        Courses::whereId($id)->update($data);
         return redirect()->route('courses-all');
     }
 }
