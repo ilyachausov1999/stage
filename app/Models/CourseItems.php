@@ -11,10 +11,16 @@ class CourseItems extends Model
 {
     use HasFactory;
 
+    public $table = 'course_items';
     protected $fillable =
         [
             'description',
             'text',
             'course_id'
         ];
+
+    public function course()
+    {
+        return $this->belongsTo(Courses::class);
+    }
 }

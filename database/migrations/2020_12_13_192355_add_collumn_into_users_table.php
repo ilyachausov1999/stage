@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddBirthdateUsers extends Migration
+class AddCollumnIntoUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class AddBirthdateUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-
-            $table->timestamp('birthdate')->after('email')->nullable();
-
+        Schema::table('users', function($table) {
+            $table->boolean('verified')->default(false);
+            $table->string('token')->nullable();
         });
     }
 
@@ -27,9 +26,9 @@ class AddBirthdateUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('birthdate');
-
+        Schema::table('users', function($table) {
+            $table->dropColumn('verified');
+            $table->dropColumn('token');
         });
     }
 }

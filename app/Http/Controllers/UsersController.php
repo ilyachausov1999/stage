@@ -100,7 +100,6 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $user = Users::query()->findOrFail($id);
-
         $validator = Validator::make($request->all(), [
             'login' => 'required|unique:users|max:255',
             'name' => 'required',

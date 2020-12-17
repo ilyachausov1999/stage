@@ -13,7 +13,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
 
-        <title></title>
+        <title>@yield('title')</title>
     </head>
 
     <body>
@@ -21,7 +21,7 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Lms Name</a>
+                    <a class="navbar-brand" href="/">Lms Name</a>
                 </div>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -63,6 +63,8 @@
                 </ul>
             </div>
         </nav>
-
+    <div>
+        @yield('content')
+    </div>
     </body>
 </html>

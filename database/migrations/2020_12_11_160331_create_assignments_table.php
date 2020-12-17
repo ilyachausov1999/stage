@@ -19,7 +19,7 @@ class CreateAssignmentsTable extends Migration
             $table->foreignId('course_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('course_id')->references('id')->on('courses');
-            $table->timestamp('until_at');
+            $table->timestamp('until_at')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
