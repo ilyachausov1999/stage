@@ -25,6 +25,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/', function () {
     return view('admin/login');
 });
+//RegisterController
+Route::prefix('register')->group(function () {
+    Route::get('', 'App\Http\Controllers\RegistrationController@register')->name('register');
+    Route::post('', 'App\Http\Controllers\RegistrationController@postRegister')->name('post-register');
+    Route::get('/confirm/{token}', 'App\Http\Controllers\RegistrationController@confirmEmail')->name('confirmEmail');
+});
+
+//CoursesController
 Route::middleware(['auth'])->group(function () {
     Route::prefix('/admin/courses')->group(function () {
         Route::name('courses-')->group(function () {
@@ -36,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/submit', 'App\Http\Controllers\Admin\CoursesController@submit')->name('submit');
             Route::get('', 'App\Http\Controllers\Admin\CoursesController@getAll')->name('all');
             Route::get('{id}/content-blocks', 'App\Http\Controllers\CourseItemsController@index')->name('index');
+            Route::post('{id}/content-blocks', 'App\Http\Controllers\CourseItemsController@store')->name('store');
         });
     });
 });
