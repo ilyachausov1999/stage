@@ -13,6 +13,7 @@
             </div>
         @endforeach
 
+
 <div class="dropdown">
     <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Добавить контентый блок
@@ -23,12 +24,13 @@
 
             <div class="form-group">
                 <label for="content-title">Заголовок</label>
-                <input type="text" name="description" value="" class="form-control " id="content-title">
+                <input type="text" name="description" value="" class="form-control " id="description">
 
             </div>
             <div class="form-group">
                 <label for="content-body">Текст</label>
-                <textarea type="text" name="text"  style="height: 20rem;" class="form-control" id="content-body"></textarea>
+                <textarea type="text" name="text"  style="height: 20rem;" class="form-control" id="text"></textarea>
+
             </div>
 
             <button class="btn btn-success" type="submit">Добавить блок</button>
@@ -39,4 +41,18 @@
     </div>
 </div>
 @endsection
+
+@push('styles')
+    <link href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
+@endpush
+
+@push('scripts')
+        <script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
+        <script src="{{ asset('plugins/summernote/lang/summernote-ru-RU.min.js') }}"></script>
+        <script>
+            $(function (){
+                $("#text").summernote();
+            });
+        </script>
+@endpush
 
