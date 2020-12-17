@@ -69,20 +69,20 @@ class CoursesController extends Controller
         $image = $req->file('image');
         if ($image != '') {
             $req->validate([
-                'name'    =>  'required',
-                'image'         =>  'image|max:2048'
+                'name'   =>  'required',
+                'image'  =>  'image|max:2048'
             ]);
 
             $file = rand() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $file);
         } else {
             $req->validate([
-                'name'    =>  'required',
+                'name'   =>  'required',
             ]);
         }
         $data = array(
             'name'       =>   $req->name,
-            'image'            =>   $file
+            'image'      =>   $file
         );
         Courses::whereId($id)->update($data);
         return redirect()->route('courses-all');
