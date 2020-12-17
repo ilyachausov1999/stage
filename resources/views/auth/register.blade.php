@@ -1,15 +1,10 @@
-
 @section('content')
 @extends('layouts.template')
-
 <div class="container">
-
     <div class="row justify-content-center">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-2 col-md-offset-5"><h3>Регистрация</h3></div>
+        <div class="col-md-8 col-md-offset-3">
             <div class="card">
-                <div class="card-header"><h3>Регистрация</h3></div>
-
-
                 <div class="card-body">
                     @include('flash')
                     <form method="POST" action='{{ url("register/") }}'>
