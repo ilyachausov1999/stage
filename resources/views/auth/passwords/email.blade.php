@@ -1,4 +1,4 @@
-                        @if (session('status'))
+@if (session('status'))
 
 @extends('layouts.email')
 
@@ -6,3 +6,4 @@
 
 
 
+@endif
