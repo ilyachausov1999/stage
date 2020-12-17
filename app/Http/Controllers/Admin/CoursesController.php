@@ -66,7 +66,7 @@ class CoursesController extends Controller
     public function update(createCoursesRequest $req, $id)
     {
         $file = $req->hidden_image;
-        $image = $req->file('image');
+        $image = $req->file('/home/intern/site/public/images');
         if ($image != '') {
             $req->validate([
                 'name'   =>  'required',
