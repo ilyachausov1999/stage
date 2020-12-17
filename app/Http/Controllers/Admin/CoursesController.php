@@ -27,7 +27,11 @@ class CoursesController extends Controller
         $image = $req->file('image');
 
         $file = rand() . '.' . $image->getClientOriginalExtension();
+<<<<<<< HEAD
         $image->move(public_path('/storage'), $file);
+=======
+        $image->move(public_path('images'), $file);
+>>>>>>> b6cf06c1e1fc1b9b3c0a97f6a52a83f91adbf714
         $data = array(
             'name'    =>   $req->name,
             'image'   =>   $file
