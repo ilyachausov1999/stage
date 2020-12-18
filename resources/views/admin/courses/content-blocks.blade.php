@@ -35,50 +35,7 @@
                 </form>
             </div>
             <a href="/admin/courses" class="btn btn-primary" type="submit" >На страницу курсов</a>
+            <a href="{{ route('courses-test' , $id) }}" class="btn btn-primary" type="submit" >Добавить тест</a>
         </div>
-
-
-
-            <div class="dropdown">
-                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Добавить блок-тест
-                </button>
-                <div class="dropdown-menu" style="width: 100%">
-                    <form method="POST" enctype="multipart/form-data" action="{{ route('courses-testStore', $id) }}">
-                        @csrf
-
-                        <div class="form-group">
-                            <label for="content-title">Название теста</label>
-                            <input type="text" name="test_name" value="" class="form-control " id="content-title">
-                        </div>
-
-                        <button class="btn btn-success" type="submit">Сохранить</button>
-                    </form>
-                </div>
-            </div>
-
-
-
-
-            <div class="dropdown">
-                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Добавить вопрос
-                </button>
-                <div class="dropdown-menu" style="width: 100%">
-                    <form method="POST" enctype="multipart/form-data" action="{{ route('courses-testStore', $id) }}">
-                        @csrf
-
-                        <div class="form-group">
-                            <label for="content-title">Вопрос</label>
-                            <input type="text" name="questions" value="" class="form-control " id="content-title">
-                        </div>
-
-                        <button class="btn btn-success" type="submit">Сохранить</button>
-                    </form>
-                </div>
-            </div>
-
-
-</div>
 @endsection
 

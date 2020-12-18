@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CourseItems;
-use App\Models\CourseItemTest;
 
 
 class CourseItemsController extends Controller
@@ -29,17 +28,6 @@ class CourseItemsController extends Controller
         ]);
 
         $courseItem->save();
-
-       return redirect(Route('courses-index', $id));
-    }
-
-    public function testStore(Request $request, int $id)
-    {
-        $courseItemTest = new CourseItemTest([
-            'test_name' => $request->get('test_name'),
-            'course_id' => $id,
-        ]);
-
-        $courseItemTest->save();
+        return redirect(Route('courses-index', $id));
     }
 }

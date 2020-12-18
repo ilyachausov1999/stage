@@ -17,6 +17,7 @@ class CreateQuestionsTable extends Migration
             $table->id();
             $table->string('question');
             $table->mediumText('image')->nullable();
+            $table->string('type')->nullable();
             $table->foreignId('test_id');
             $table->foreign('test_id')->references('id')->on('tests');
             $table->timestamps();

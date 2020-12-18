@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/test-block', function () {
+    return view('admin/courses/test-block');
 });
 
 Auth::routes();
@@ -45,7 +45,11 @@ Route::middleware(['auth'])->group(function () {
             Route::get('', 'App\Http\Controllers\Admin\CoursesController@getAll')->name('all');
             Route::get('{id}/content-blocks', 'App\Http\Controllers\CourseItemsController@index')->name('index');
             Route::post('{id}/content-blocks', 'App\Http\Controllers\CourseItemsController@store')->name('store');
-            Route::post('{id}/content-blocks-test', 'App\Http\Controllers\CourseItemsController@testStore')->name('testStore');
+            //tests
+            Route::get('{id}/content-blocks/tests', 'App\Http\Controllers\TestsController@index')->name('index');
+
+            Route::get('{id}/test-block', 'App\Http\Controllers\CourseTestController@test')->name('test');
+            Route::post('{id}/blocks-test', 'App\Http\Controllers\CourseTestController@testStore')->name('testStore');
         });
     });
 });
