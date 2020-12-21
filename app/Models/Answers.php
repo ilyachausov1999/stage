@@ -16,4 +16,9 @@ class Answers extends Model
         'is_correct',
         'question_id',
     ];
+
+    public function questions()
+    {
+        return $this->hasMany(Questions::class);
+    }
 }

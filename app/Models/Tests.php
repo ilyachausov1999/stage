@@ -1,20 +1,28 @@
 <?php
 
-namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Tests
+ * @package App\Models
+ * @property int $id
+ * @property string $name
+ * @property int $course_id
+ */
 class Tests extends Model
 {
-    use HasFactory;
 
-    public $table = 'questions';
+    public $table = 'tests';
     protected $fillable =
     [
-        'question',
-        'image',
-        'type',
-        'test_id',
+        'name',
+        'course_id',
     ];
+
+    public function course()
+    {
+        return $this->belongsTo(Courses::class);
+    }
 }

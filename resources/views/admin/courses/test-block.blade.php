@@ -24,13 +24,17 @@
 
                 <div class="form-group">
                     <label for="content-title">Вопрос</label>
-                    <input type="text" name="questions" value="" class="form-control " id="content-title">
+                    <input type="text" name="question" value="" class="form-control " id="content-title">
                 </div>
 
                 <div class="form-group">
                     <label for="content-title">Ответ</label>
-                    <input type="text" name="answers" value="" class="form-control " id="content-title">
+                    <input type="text" name="answer[0]" value="" class="form-control " id="content-title">
+                    <input type="checkbox" class="form-check-input" name="is_correct[0]" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Верный ответ</label>
                 </div>
+
+
 
 
                 <button class="btn btn-success" type="submit">Сохранить</button>
