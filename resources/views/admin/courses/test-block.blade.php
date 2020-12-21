@@ -24,18 +24,26 @@
 
                 <div class="form-group">
                     <label for="content-title">Вопрос</label>
-                    <input type="text" name="question" value="" class="form-control " id="content-title">
+                    <input type="text" name="questions[0][name]" value="" class="form-control " id="content-title">
                 </div>
-
                 <div class="form-group">
                     <label for="content-title">Ответ</label>
-                    <input type="text" name="answer[0]" value="" class="form-control " id="content-title">
-                    <input type="checkbox" class="form-check-input" name="is_correct[0]" id="exampleCheck1">
+                    <input type="text" name="questions[0][answers][0][answer]" value="" class="form-control " id="content-title">
+                    <input type="checkbox" class="form-check-input" name="questions[0][answers][0][is_correct]" id="exampleCheck1" >
                     <label class="form-check-label" for="exampleCheck1">Верный ответ</label>
                 </div>
-
-
-
+                <div class="form-group">
+                    <label for="content-title">Ответ</label>
+                    <input type="text" name="questions[0][answers][1][answer]" value="" class="form-control " id="content-title">
+                    <input type="checkbox" class="form-check-input" name="questions[0][answers][1][is_correct]" id="exampleCheck1"  >
+                    <label class="form-check-label" for="exampleCheck1">Верный ответ</label>
+                </div>
+                <div class="form-group">
+                    <label for="content-title">Ответ</label>
+                    <input type="text" name="questions[0][answers][2][answer]" value="" class="form-control " id="content-title">
+                    <input type="checkbox" class="form-check-input" name="questions[0][answers][2][is_correct]" id="exampleCheck1" >
+                    <label class="form-check-label" for="exampleCheck1">Верный ответ</label>
+                </div>
 
                 <button class="btn btn-success" type="submit">Сохранить</button>
             </form>

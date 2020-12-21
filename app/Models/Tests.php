@@ -25,4 +25,9 @@ class Tests extends Model
     {
         return $this->belongsTo(Courses::class);
     }
+
+    public function questions()
+    {
+        return $this->hasMany(Questions::class, 'test_id');
+    }
 }

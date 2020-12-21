@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateTestRequest;
 use App\Models\Answers;
 use App\Models\Questions;
 use App\Models\Tests;
@@ -17,62 +18,45 @@ class TestsController
         return view('admin/courses/test-block',['courseItemTest' => $courseItemTest, 'id' => $id ]);
     }
 
-    public function testStore(Request $request, int $id)
+    public function testStore(CreateTestRequest $request, int $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
+        $questionsData = $request->get('questions');
 
         DB::beginTransaction();
 
         try {
-            $courseItemTest = new Tests([
+            $test = new Tests([
                 'name' => $request->get('name'),
                 'course_id' => $id,
             ]);
-            $courseItemTest->save();
+            $test->save();
 
-            $questionsData = new Questions([
-                'question' => $request->get('question'),
-                'test_id' => $courseItemTest->getAttribute('id')
-            ]);
-            $questionsData->save();
+            foreach ($questionsData as $questionItem) {
+                if (!isset($questionItem['name'])) {
+                    continue;
+                }
+                $answersData = $questionItem['answers'];
+                /**
+                 * @var Questions $question
+                 */
 
-            if($request->get('is_correct') == 'on')
-            {
-                $is_correct[] = true;
+                $question = $test
+                    ->questions()
+                    ->create(
+                        [
+                    'question' => $questionItem['name']
+                        ]
+                    );
+
+                $preparedAnswerData = array_map(function ($value){
+                    $isCorrect = isset($value['is_correct']) && $value['is_correct'] === 'on';
+                    return ['answer' => $value['answer'],'is_correct' => $isCorrect];
+                },$answersData);
+
+                if (count($preparedAnswerData)) {
+                    $question->answers()->createMany($preparedAnswerData);
+                }
             }
-            else $is_correct[] = false;
-
-//            $answersData = new Answers([
-//                'answer' => $request->get('answer'),
-//                'is_correct' => $is_correct,
-//                'question_id' => $questionsData->getAttribute('id')
-//            ]);
-//            $answersData->save();
-
-            $answers[] = new Answers([
-                'answer' => $request->get('answer'),
-                'is_correct' => $is_correct,
-                'question_id' => $questionsData->getAttribute('id')
-            ]);
-
-            $question = Answers::find(1);
-            $answers = $question->answers;
-
-//            $questions = new Questions();
-//            $questions->tests()->saveMany($answers);
-
-
-//            $answerData->save();
-
-//            $questionsData = Questions::class;
-//            $questionsData->tests()->saveMany([
-//                new Answers([
-//                    'answer' => $request->get('answer'),
-//                    'is_correct' => $is_correct,
-//                    'question_id' => $questionsData->getAttribute('id')])
-//            ]);
 
             DB::commit();
         } catch (\Throwable $e) {
