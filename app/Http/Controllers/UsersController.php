@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\View;
 
 class UsersController extends Controller
 {
@@ -28,7 +28,10 @@ class UsersController extends Controller
     {
         $users = Users::query()->with('role')->get();
 
-        return view('admin/viewUsers', ['users' => $users]);
+        $courses =DB::table('courses')
+            ->get();
+
+        return view('admin/viewUsers', ['users' => $users, 'courses' => $courses]);
     }
 
 

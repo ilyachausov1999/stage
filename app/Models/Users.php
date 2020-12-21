@@ -5,6 +5,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class Users
@@ -38,13 +40,20 @@ class Users extends Model
         'updated_at',
     ];
 
-    public function role()
+    public function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Roles::class);
     }
 
-    public function course()
+
+    public function courses(): BelongsToMany
     {
-        return $this->hasMany(Courses::class);
+        return $this->belongsToMany(Courses::class, 'assignments');
     }
+
+    public function assignments(): HasMany
+    {
+        return $this->hasMany(Assignments::class);
+    }
+
 }

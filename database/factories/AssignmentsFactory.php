@@ -28,8 +28,8 @@ class AssignmentsFactory extends Factory
 
 
         return [
-            'user_id' => $usersId[rand(0, count($usersId) - 1)],
-            'course_id' => $coursesId[rand(0, count($coursesId) - 1)],
+            'users_id' => $usersId[rand(0, count($usersId) - 1)],
+            'courses_id' => $coursesId[rand(0, count($coursesId) - 1)],
         ];
     }
 }

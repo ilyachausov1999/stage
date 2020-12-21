@@ -70,7 +70,11 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('file/{filePath?}', \App\Http\Controllers\FileController::class . '@getFile')->name('file.get');
-//CoursesController
+
+Route::prefix('admin')->group(function (){
+    Route::get('assignments', \App\Http\Controllers\AssignmentsController::class . '@index')->name('assignments.index');
+    Route::post('user/{id}/assign', \App\Http\Controllers\AssignmentsController::class . '@store')->name('assignments.store');
+});
 
 
 //Route::middleware()
