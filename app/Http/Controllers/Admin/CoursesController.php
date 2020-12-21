@@ -7,9 +7,8 @@ use App\Http\Requests\createCoursesRequest;
 use App\Models\Courses;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+
 
 class CoursesController extends Controller
 {
