@@ -5,8 +5,6 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
                 <div class="card-body">
                     @include('flash')
                     <form method="POST" action="{{ route('login') }}">
@@ -63,6 +61,12 @@
                                     {{ __('Забыли пароль?') }}
                                 </a>
                                 @endif
+                            </div>
+                        </div>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <label class="form-check-label" for="remember">{{ __('Нет учетной записи? Пройди регистрацию!') }}</label>
+                                <a href="{{ route('register') }}" class="btn btn-success">Зарегистрироваться</a>
                             </div>
                         </div>
                     </form>

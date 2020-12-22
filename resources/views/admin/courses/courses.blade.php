@@ -8,16 +8,12 @@
             <h3>{{ $value->name }}</h3>
             <div class="center">
                 <a href="{{ route('courses-edit', $value->id) }}" class="btn btn-primary btn-lg">Изменить</a>
-                <a href="{{ route('courses-delete', $value->id) }}" class="btn btn-primary btn-lg">Удалить</a>
-                <a href="{{ route('courses-index', $value->id) }}" class="btn btn-primary btn-lg">Добавить блок</a>
+                <a href="{{ route('courses-delete', $value->id) }}" class="btn btn-danger btn-lg">Удалить</a>
+                <a href="{{ route('courses-index', $value->id) }}" class="btn btn-success btn-lg">Добавить блок</a>
             </div>
         </div>
         @endforeach
-
-    </div>
-    <div class="text-right">
-        {{ $course->links() }}
+        {{ $course->links('paginate') }}
     </div>
     @endif
 </div>
-

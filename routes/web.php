@@ -22,9 +22,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/', function () {
-    return view('admin/login');
-});
 //RegisterController
 Route::prefix('register')->group(function () {
     Route::get('', 'App\Http\Controllers\RegistrationController@register')->name('register');
@@ -62,11 +59,11 @@ Route::prefix('admin')->group(function () {
     Route::get('user/{id}/update', \App\Http\Controllers\UsersController::class . '@edit')->name('users.edit');
     Route::put('user/{id}/update', \App\Http\Controllers\UsersController::class . '@update')->name('users.update');
 
-//роут для контента
+    //роут для контента
     Route::resource('content', 'App\Http\Controllers\CourseItemsController');
 
 
-//RegisterController
+    //RegisterController
     Route::prefix('register')->group(function () {
         Route::get('', 'App\Http\Controllers\RegistrationController@register')->name('register');
         Route::post('', 'App\Http\Controllers\RegistrationController@postRegister')->name('post-register');
@@ -81,7 +78,11 @@ Route::get('file/{filePath?}', \App\Http\Controllers\FileController::class . '@g
 //Route::middleware()
 //Route::post('/admin/courses/{id}/edit/content', 'App\Http\Controllers\CourseItemsController@index')->name('index');
 
-
-// Route::middleware(['auth'])->prefix('admin/courses')->name('courses-')->group(function () {
-//     Route::resource('/all', 'App\Http\Controllers\Admin\CoursesController@getAll')->name('all');
-// });
+//Пользовательская часть
+Route::prefix('courses')->name('custom-')->group(function () {
+    Route::get('', 'App\Http\Controllers\Users\CustomController@getAll')->name('courses');
+    Route::get('/{id}', 'App\Http\Controllers\Users\CustomController@view')->name('view');
+    Route::middleware(['auth'])->group(function () {
+        Route::get('{id}/block', 'App\Http\Controllers\Users\CustomController@show')->name('block');
+    });
+});
