@@ -50,7 +50,8 @@ Route::middleware(['auth'])->group(function () {
             Route::post('{id}/content-blocks', 'App\Http\Controllers\CourseItemsController@store')->name('store');
             //tests
             //Route::get('{id}/content-blocks/tests', 'App\Http\Controllers\TestsController@index')->name('index');
-
+            Route::get('{id}/tests', 'App\Http\Controllers\TestsController@testIndex')->name('testIndex');
+            Route::delete('{id}/tests/delete', 'App\Http\Controllers\TestsController@destroy')->name('destroy');
             Route::get('{id}/test-block', 'App\Http\Controllers\TestsController@test')->name('test');
             Route::post('{id}/blocks-test', 'App\Http\Controllers\TestsController@testStore')->name('testStore');
         });
