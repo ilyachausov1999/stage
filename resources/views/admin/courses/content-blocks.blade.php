@@ -34,6 +34,7 @@
                 <div class="form-group">
                     <label>Изображение</label>
                     <input type="file" name="image" class="form-control">
+                    <h5>* максимальный размер изображения 1мб</h5>
                 </div>
 
                 <button class="btn btn-success" type="submit">Добавить блок</button>

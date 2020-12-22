@@ -1,4 +1,3 @@
-
 <div class="container">
     <h3>Редактировать:</h3>
     <form method="post" enctype="multipart/form-data" action="{{ route('courses-update', $data->id)}}">
@@ -10,10 +9,10 @@
         <div class="form-group">
             <label>Изображение</label>
             <input type="file" name="image" class="form-control" value="{{$data->name}}">
+            <h5>* максимальный размер изображения 1мб</h5>
         </div>
         @include('errors.errors')
-        <input type="submit" name="submit" value="Сохранить" class="btn btn-primary btn-lg">
+        <input type="submit" name="submit" value="Сохранить" class="btn btn-success btn-lg">
 
     </form>
 </div>
-
