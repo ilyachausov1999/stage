@@ -7,6 +7,7 @@ use App\Models\CourseItems;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
+
 class CourseItemsController extends Controller
 {
     public function index(int $id)
@@ -17,7 +18,6 @@ class CourseItemsController extends Controller
 
     public function store(Request $request, int $id)
     {
-
         $request->validate([
             'description'   => 'required',
             'text'          => 'required',

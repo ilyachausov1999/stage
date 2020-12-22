@@ -60,7 +60,6 @@
 
                 </ul>
 
-                </ul>
             </div>
         </nav>
     <div>
