@@ -67,17 +67,17 @@ class CoursesController extends Controller
 
     public function update(createCoursesRequest $req, $id)
     {
-        $file = $req->hidden_image;
         $image = $req->file('image');
         if ($image != '') {
             $req->validate([
                 'name'   =>  'required',
-                'image'  =>  'image|max:2048'
+                'image'  =>  'required|image|max:2048'
             ]);
             $path = Storage::put('', $image);
         } else {
             $req->validate([
                 'name'   =>  'required',
+                'image'   =>  'required'
             ]);
         }
         $data = array(
