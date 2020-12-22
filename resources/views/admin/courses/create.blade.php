@@ -1,4 +1,3 @@
-
 <div class="container">
     <h3>Добавление курса</h3>
     <form action="/admin/courses/submit" method="POST" enctype="multipart/form-data">
@@ -10,8 +9,9 @@
         <div class="form-group">
             <label>Изображение</label>
             <input type="file" name="image" class="form-control">
+            <h5>* максимальный размер изображения 1мб</h5>
         </div>
         @include('errors.errors')
-        <input type="submit" name="submit" value="Сохранить" class="btn btn-primary btn-lg">
+        <input type="submit" name="submit" value="Сохранить" class="btn btn-success btn-lg">
     </form>
 </div>

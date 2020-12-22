@@ -25,12 +25,10 @@ class CoursesController extends Controller
             'name'     =>  'required|string|min:1|max:255',
             'image'         =>  'required|image|max:2048'
         ]);
-
         /**
          * @var UploadedFile $image
          */
         if ($image = $req->file('image')) {
-           // $resizedImage = Courses::make($image->getRealPath())->resize(200, 200)->save($path);
             $path = Storage::put('', $image);
 
             Courses::query()->create([
@@ -44,10 +42,7 @@ class CoursesController extends Controller
 
     public function getAll()
     {
-        /**
-         * @todo rodia сделай пагинацию
-         */
-        $course = Courses::simplePaginate(999);
+        $course = Courses::paginate(5);
         return view('admin.viewCourses', compact('course'));
     }
 
@@ -72,18 +67,17 @@ class CoursesController extends Controller
 
     public function update(createCoursesRequest $req, $id)
     {
-        $file = $req->hidden_image;
         $image = $req->file('image');
         if ($image != '') {
             $req->validate([
                 'name'   =>  'required',
-                'image'  =>  'image|max:2048'
+                'image'  =>  'required|image|max:2048'
             ]);
-
             $path = Storage::put('', $image);
         } else {
             $req->validate([
                 'name'   =>  'required',
+                'image'   =>  'required'
             ]);
         }
         $data = array(
