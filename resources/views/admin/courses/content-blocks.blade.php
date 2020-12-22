@@ -79,7 +79,7 @@
 
             </div>
             <a href="/admin/courses" class="btn btn-primary" type="submit">На страницу курсов</a>
-            <a href="{{route('courses-test' , $id)}}" class="btn btn-primary" type="submit">Добавить тест</a>
+            <a href="{{route('courses-testIndex' , $id)}}" class="btn btn-primary" type="submit">Добавить тест</a>
         </div>
     </div>
 
