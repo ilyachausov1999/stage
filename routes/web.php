@@ -20,7 +20,12 @@ Route::get('/test-block', function () {
 
 Auth::routes();
 
+Route::get('/', function () {
+    return view('admin/login');
+});
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 //RegisterController
 Route::prefix('register')->group(function () {
@@ -58,7 +63,7 @@ Route::prefix('admin')->group(function () {
     Route::delete('user/{id}/delete', \App\Http\Controllers\UsersController::class . '@destroy')->name('users.delete');
     Route::get('user/{id}/update', \App\Http\Controllers\UsersController::class . '@edit')->name('users.edit');
     Route::put('user/{id}/update', \App\Http\Controllers\UsersController::class . '@update')->name('users.update');
-    
+
 
 
     //RegisterController
