@@ -73,8 +73,6 @@
             <a href="/admin/courses" class="btn btn-primary" type="submit">На страницу курсов</a>
         </div>
     </div>
-    </body>
-    </html>
 
 @endsection
 
