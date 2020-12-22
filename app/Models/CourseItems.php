@@ -16,7 +16,8 @@ class CourseItems extends Model
         [
             'description',
             'text',
-            'course_id'
+            'course_id',
+            'image'
         ];
 
     public function course()

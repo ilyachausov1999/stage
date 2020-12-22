@@ -1,5 +1,6 @@
 @extends('layouts.template')
 @section('content')
+<<<<<<< resources/views/admin/courses/content-blocks.blade.php
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -66,15 +67,21 @@
                         </script>
                     </div>
 
+                    <div class="form-group">
+                    <label>Изображение</label>
+                    <input type="file" name="image" class="form-control">
+                    <h5>* максимальный размер изображения 1мб</h5>
+                </div>
+
+
                     <button class="btn btn-success" type="submit">Добавить блок</button>
                 </form>
 
             </div>
             <a href="/admin/courses" class="btn btn-primary" type="submit">На страницу курсов</a>
+            <a href="{{route('courses-test' , $id)}}" class="btn btn-primary" type="submit">Добавить тест</a>
         </div>
     </div>
 
 @endsection
-
-
 

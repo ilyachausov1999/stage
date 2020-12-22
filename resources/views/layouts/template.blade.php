@@ -19,11 +19,11 @@
 
 <body>
 
-<nav class="navbar navbar-inverse" style="background: rebeccapurple">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/home" style="color: lawngreen">Lms Name</a>
-        </div>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Lms Name</a>
+                </div>
 
         <ul class="nav navbar-nav navbar-right">
 
@@ -61,6 +61,10 @@
 
         </ul>
 
+            </div>
+        </nav>
+    <div>
+        @yield('content')
     </div>
 </nav>
 <div>
