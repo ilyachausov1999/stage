@@ -22,7 +22,7 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/">Lms Name</a>
+                    <a class="navbar-brand" href="/home">Lms Name</a>
                 </div>
 
         <ul class="nav navbar-nav navbar-right">
@@ -30,7 +30,7 @@
             @guest
                 @if (Route::has('login'))
                     <li class="nav-item">
-                        <a class="nav-link"  style="color: lawngreen" href="/"><span class="glyphicon glyphicon-log-in"></span> {{ __('Login') }}</a>
+                        <a class="nav-link"  style="color: lawngreen" href="/login"><span class="glyphicon glyphicon-log-in"></span> {{ __('Login') }}</a>
                     </li>
                 @endif
 
@@ -45,8 +45,8 @@
                         <span class="glyphicon glyphicon-remove-sign"></span> {{ Auth::user()->name }}
                     </a>
 
-                    <div class="dropdown-menu dropdown-menu-right" style="color: lawngreen; background: #9561e2" aria-labelledby="navbarDropdown" style = "background: #292929; border-radius: 10px;">
-                        <a class="dropdown-item" style="color: lawngreen; background: #9561e2" href="{{ route('logout') }}"
+                    <div class="dropdown-menu dropdown-menu-right" style="color: lawngreen; background: black" aria-labelledby="navbarDropdown" style = "background: #292929; border-radius: 10px;">
+                        <a class="dropdown-item" style="color: lawngreen; background: black" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
