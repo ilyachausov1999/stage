@@ -13,13 +13,17 @@
             <td>{{ $usersHasAssign->login }}</td>
             <td>{{ $usersHasAssign->name }}</td>
             <td>{{ $usersHasAssign->surname }}</td>
-
-
             <td></td>
             <td>
                 @foreach($usersHasAssign->courses as $userCourses)
                     <p>{{$userCourses['name']}}</p>
+{{--                <form method="post" action = "{{ route('assignments.delete', [$usersHasAssign->id, $userCourses->id])}}">--}}
+{{--                    @csrf--}}
+{{--                    @method('DELETE')--}}
+{{--                    <button  onclick="return confirm('Вы уверены, что хотите удалить пользователя?')" class="btn btn-sm btn-danger col-md-8">Удалить</button>--}}
+{{--                </form>--}}
                 @endforeach
+
 {{--                @csrf--}}
 {{--                @method('DELETE')--}}
 {{--                <form method="post" action = "{{ route('users.delete', $userView->id) }}">--}}

@@ -14,6 +14,7 @@ class CreateAssignmentsTable extends Migration
     public function up()
     {
         Schema::create('assignments', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('courses_id')->constrained();
             $table->foreignId('users_id')->constrained();
             $table->timestamps();

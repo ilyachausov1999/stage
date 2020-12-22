@@ -38,4 +38,13 @@ class AssignmentsController extends Controller
         return redirect(Route('assignments.index'));
     }
 
+    public function destroy($id)
+    {
+
+
+        return redirect(Route('assignments.index'));
+    }
+
+
+
 }

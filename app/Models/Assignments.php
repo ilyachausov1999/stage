@@ -10,6 +10,7 @@ class Assignments extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id',
         'users_id',
         'courses_id'
     ];
@@ -22,9 +23,9 @@ class Assignments extends Model
             ->as('assign');
     }
 
-    public function courses()
+    public function assignments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-
+        return $this->hasMany(Users::class, 'assignments');
 
     }
 }
