@@ -13,6 +13,8 @@ class AssignmentsController extends Controller
     {
         $usersHasAssign = Users::with('courses')->has('assignments')->get();
 
+        Assignments::with(['users', 'courses'])->paginate(15);
+
         return view('admin/assignments', ['assignments'  => $usersHasAssign]);
     }
 
