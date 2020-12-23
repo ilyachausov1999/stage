@@ -8,10 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Courses extends Model
 {
     use HasFactory;
+
     public $table = 'courses';
     protected $fillable =
-    [
-        'name',
-        'image'
-    ];
+        [
+            'name',
+            'image'
+        ];
+
+    public function assignments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Assignments::class, 'courses_id', 'id' );
+    }
 }
