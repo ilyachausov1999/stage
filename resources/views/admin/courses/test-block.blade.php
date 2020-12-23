@@ -1,75 +1,105 @@
 @extends('layouts.template')
-@section('template')
+
 @section('content')
 
 <div class="container">
-    <div div class = "col-xs-12 col-md-2 rounded "  style = " border-radius: 10px; border: 4px double black;">
-    @foreach($courseItemTest as $item)
-        <div class="card" style="width: 100%;">
-            <h5 class="card-header"><b>Заголовок : {{ $item->name }}</b></h5>
-        </div>
-    @endforeach
-    </div>
 
     <div >
-             <h3>Добавить блок-тест</h3>
+             <h3>Создать тест</h3>
         <div  style="width: 100%">
-            <form method="POST" enctype="multipart/form-data" action="{{ route('courses-testStore', $id) }}">
+            <form method="POST" enctype="multipart/form-data" id="form" action="{{ route('courses-testStore', $id) }}">
                 @csrf
 
                 <div class="form-group">
                     <label for="content-title">Название теста</label>
-                    <input type="text" name="name" value="" class="form-control " id="content-title">
+                    <input type="text" name="name" value="" class="form-control" id="content-title">
                 </div>
 
-                <div class="form-group">
-                    <label for="content-title">Вопрос</label>
-                    <input type="text" name="questions[0][name]" value="" class="form-control " id="content-title">
-                </div>
-                <div class="form-group">
-                    <label for="content-title">Ответ</label>
-                    <input type="text" name="questions[0][answers][0][answer]" value="" class="form-control " id="content-title">
-                    <input type="checkbox" class="form-check-input" name="questions[0][answers][0][is_correct]" id="exampleCheck1" >
-                    <label class="form-check-label" for="exampleCheck1">Верный ответ</label>
-                </div>
-                <div class="form-group">
-                    <label for="content-title">Ответ</label>
-                    <input type="text" name="questions[0][answers][1][answer]" value="" class="form-control " id="content-title">
-                    <input type="checkbox" class="form-check-input" name="questions[0][answers][1][is_correct]" id="exampleCheck1"  >
-                    <label class="form-check-label" for="exampleCheck1">Верный ответ</label>
-                </div>
-                <div class="form-group">
-                    <label for="content-title">Ответ</label>
-                    <input type="text" name="questions[0][answers][2][answer]" value="" class="form-control " id="content-title">
-                    <input type="checkbox" class="form-check-input" name="questions[0][answers][2][is_correct]" id="exampleCheck1" >
-                    <label class="form-check-label" for="exampleCheck1">Верный ответ</label>
-                </div>
-
+                <button class="btn btn-success" type="button" onclick="add_question()">Добавить вопрос</button>
+                <button class="btn btn-success" type="button" onclick="add_answer()">Добавить ответ</button>
                 <button class="btn btn-success" type="submit">Сохранить</button>
             </form>
         </div>
     </div>
 
+            <script>
+                let n = 0;
+                function add_question(){
+                    n = n + 1;
+                    var name = "Вопрос" + n;
+                    var y = document.getElementById("form");
+                    var new_label = document.createElement("label");
+                    new_label.setAttribute("for", "content-title");
+                    new_label.setAttribute("id", "label_qv" + n);
+                    var pos1 = y.childElementCount;
+                    y.insertBefore(new_label, y.childNodes[pos1]);
+                    var label_qv = document.getElementById("label_qv" + n);
+                    label_qv.insertAdjacentHTML('afterbegin' , name);
 
-    <div class="dropdown">
-        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Добавить вопрос
-        </button>
-        <div class="dropdown-menu" style="width: 100%">
-            <form method="POST" enctype="multipart/form-data" action="{{ route('courses-testStore', $id) }}">
-                @csrf
-
-                <div class="form-group">
-                    <label for="content-title">Вопрос</label>
-                    <input type="text" name="name" value="" class="form-control " id="content-title">
-                </div>
-
-                <button class="btn btn-success" type="submit">Сохранить</button>
-            </form>
-        </div>
-    </div>
+                    var new_field = document.createElement("input");
+                    new_field.setAttribute("type", "text");
+                    new_field.setAttribute("name", "questions[" + n + "][name]");
+                    new_field.setAttribute("class", "form-control");
+                    var pos = y.childElementCount;
+                    y.insertBefore(new_field, y.childNodes[pos]);
 
 
+                    var z = 0;
+                    z = z + 1;
+                    if(z > 0){x = 0}
+                }
+
+                let m = 0;
+                let x = 0;
+                function add_answer(){
+                    m = m + 1
+                    x = x + 1;
+                    let name = "Ответ" + x;
+                    var y = document.getElementById("form");
+                    var new_label = document.createElement("label");
+                    new_label.setAttribute("for", "content-title");
+                    new_label.setAttribute("id", "label_an" + m);
+                    var pos0 = y.childElementCount;
+                    y.insertBefore(new_label, y.childNodes[pos0]);
+                    var label_an = document.getElementById("label_an" + m);
+                    label_an.insertAdjacentHTML('afterbegin' , name);
+
+                    var new_field_check = document.createElement("input");
+                    new_field_check.setAttribute("type", "checkbox");
+                    new_field_check.setAttribute("name", "questions[" + n + "][answers][" + m + "][is_correct]");
+                    new_field_check.setAttribute("class", "form-check-input");
+                    var pos1 = y.childElementCount;
+                    y.insertBefore(new_field_check, y.childNodes[pos1]);
+
+                    var new_field = document.createElement("input");
+                    new_field.setAttribute("type", "text");
+                    new_field.setAttribute("name", "questions[" + n + "][answers][" + m + "][answer]");
+                    new_field.setAttribute("class", "form-control");
+                    var pos = y.childElementCount;
+                    y.insertBefore(new_field, y.childNodes[pos]);
+                }
+
+
+                  
+
+
+                // var display = document.getElementById("form");
+                // document.addEventListener("mouseover", function(e) {
+                //     lastElement = e.target;
+                //     t = (lastElement.id);
+                //     // show("name", lastElement.name);
+                //     // show("class", lastElement.className);
+                //     alert(t);
+                // })
+
+
+
+
+                // var a = document.querySelector('.form-control');
+                // a.onmouseover = function() {
+                //     alert("ыы");
+                // };
+            </script>
 
 </div>
 @endsection
