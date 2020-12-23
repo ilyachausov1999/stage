@@ -3,16 +3,62 @@
 @section('content')
 
 <div class="container">
-
     <div >
              <h3>Создать тест</h3>
+    <div  class = "col-xs-12 col-md-2 rounded "  style = " border-radius: 10px; border: 4px double black;">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        
+        <div class="card" style="width: 100%;">
+
+        </div>
+
+    </div>
+
+    <div>
+             <h3>Добавить блок-тест</h3>
         <div  style="width: 100%">
             <form method="POST" enctype="multipart/form-data" id="form" action="{{ route('courses-testStore', $id) }}">
                 @csrf
 
                 <div class="form-group">
                     <label for="content-title">Название теста</label>
-                    <input type="text" name="name" value="" class="form-control" id="content-title">
+                    <input type="text" name="name" value="" class="form-control " id="content-title">
+                </div>
+
+                <div class="form-group">
+                    <label for="content-title">Вопрос</label>
+                    <input type="text" name="questions[0][name]" value="" class="form-control " id="content-title">
+                </div>
+                <div class="form-group">
+                    <label>Изображение</label>
+                    <input type="file" name="image" class="form-control">
+                    <h5>* максимальный размер изображения 1мб</h5>
+                </div>
+                <div class="form-group">
+                    <label for="content-title">Ответ</label>
+                    <input type="text" name="questions[0][answers][0][answer]" value="" class="form-control " id="content-title">
+                    <input type="checkbox" class="form-check-input" name="questions[0][answers][0][is_correct]" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Верный ответ</label>
+                </div>
+                <div class="form-group">
+                    <label for="content-title">Ответ</label>
+                    <input type="text" name="questions[0][answers][1][answer]" value="" class="form-control " id="content-title">
+                    <input type="checkbox" class="form-check-input" name="questions[0][answers][1][is_correct]" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Верный ответ</label>
+                </div>
+                <div class="form-group">
+                    <label for="content-title">Ответ</label>
+                    <input type="text" name="questions[0][answers][2][answer]" value="" class="form-control " id="content-title">
+                    <input type="checkbox" class="form-check-input" name="questions[0][answers][2][is_correct]" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Верный ответ</label>
                 </div>
 
                 <button class="btn btn-success" type="button" onclick="add_question()">Добавить вопрос</button>
@@ -21,7 +67,6 @@
             </form>
         </div>
     </div>
-
             <script>
                 let n = 0;
                 function add_question(){
@@ -79,26 +124,6 @@
                     y.insertBefore(new_field, y.childNodes[pos]);
                 }
 
-
-                  
-
-
-                // var display = document.getElementById("form");
-                // document.addEventListener("mouseover", function(e) {
-                //     lastElement = e.target;
-                //     t = (lastElement.id);
-                //     // show("name", lastElement.name);
-                //     // show("class", lastElement.className);
-                //     alert(t);
-                // })
-
-
-
-
-                // var a = document.querySelector('.form-control');
-                // a.onmouseover = function() {
-                //     alert("ыы");
-                // };
             </script>
 
 </div>

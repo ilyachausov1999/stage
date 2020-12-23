@@ -29,21 +29,26 @@
                     <button  onclick="return confirm('Вы уверены, что хотите удалить пользователя?')" class="btn btn-sm btn-danger col-md-8">Удалить</button>
                 </form>
                 <a href="{{ route('users.update', $userView->id) }}" class="btn btn-sm btn-primary col-md-8">Обновить</a>
-                    <div class="dropdown">
-                        <button class="btn btn-sm btn-success dropdown-toggle col-md-8" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Назначить курс
-                        </button>
-                            <div class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/">Курс 1</a></li>
-                                <li><a class="dropdown-item" href="#">Курс 2</a></li>
-                                <li><a class="dropdown-item" href="#">Курс 3</a></li>
-                            </div>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-success dropdown-toggle col-md-8" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Назначить курс
+                    </button>
+                    <div class="dropdown-menu">
+                            <form  enctype="multipart/form-data" action="{{ route('assignments.store', $userView->id) }}" method="POST">
+                                @csrf
+                                <select name="course">
+                                    @foreach($courses as $course)
+                                    <option  value="{{$course->id}}">{{$course->name}}</option>
+                                @endforeach
+                                </select>
+                                <button>Отправить</button>
+                            </form>
                     </div>
+                </div>
             </td>
         </tr>
         </tbody>
         @endforeach
     </table>
-
 </div>
 

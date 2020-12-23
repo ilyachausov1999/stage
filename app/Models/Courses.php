@@ -4,22 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 
-/**
- * Class Courses
- * @package App\Models
- * @property string $image
- */
 class Courses extends Model
 {
     use HasFactory;
 
     public $table = 'courses';
-
     protected $fillable =
-    [
-        'name',
-        'image'
-    ];
+        [
+            'name',
+            'image'
+        ];
+
+    public function assignments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Assignments::class, 'courses_id', 'id' );
+    }
 }

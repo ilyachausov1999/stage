@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAssignmentsTable extends Migration
+class AddCollumnIntoCourseitems extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateAssignmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('assignments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('courses_id')->constrained();
-            $table->foreignId('users_id')->constrained();
-            $table->timestamps();
+        Schema::table('course_items', function($table) {
+            $table->mediumText('image')->nullable();
         });
     }
 
@@ -28,6 +25,8 @@ class CreateAssignmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assignments');
+        Schema::table('course_items', function($table) {
+            $table->dropColumn('image');
+        });
     }
 }
