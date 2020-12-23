@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
 class Assignments extends Model
 {
+
+    protected $table = 'assignments';
+
     use HasFactory;
     protected $fillable = [
         'id',
@@ -15,17 +19,16 @@ class Assignments extends Model
         'courses_id'
     ];
 
-    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function users(): BelongsTo
     {
-        return $this->belongsToMany(Users::class, 'assignments',
-            'courses_id','users_id')
-            ->withTimestamps()
-            ->as('assign');
-    }
-
-    public function assignments(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Users::class, 'assignments');
+        return $this->belongsTo(Users::class, 'users_id', 'id');
 
     }
+
+    public function courses(): BelongsTo
+    {
+        return $this->belongsTo(Courses::class, 'courses_id', 'id');
+
+    }
+
 }
