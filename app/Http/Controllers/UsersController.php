@@ -26,6 +26,7 @@ class UsersController extends Controller
 
     public function index()
     {
+
         $users = Users::query()->with('role')->get();
 
         $courses =DB::table('courses')

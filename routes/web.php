@@ -84,7 +84,7 @@ Route::get('file/{filePath?}', \App\Http\Controllers\FileController::class . '@g
 Route::prefix('admin')->group(function (){
     Route::get('assignments', AssignmentsController::class . '@index')->name('assignments.index');
     Route::post('user/{id}/assign', AssignmentsController::class . '@store')->name('assignments.store');
-    Route::delete('user/{userid}/assignments/{id}/delete', AssignmentsController::class . '@destroy')->name('assignments.delete');
+    Route::delete('assignments/{id}/delete', AssignmentsController::class . '@destroy')->name('assignments.delete');
 });
 
 
