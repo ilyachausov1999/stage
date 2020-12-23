@@ -14,16 +14,52 @@ use PHPUnit\Util\Test;
 
 class TestsController
 {
+
+
     public function testIndex(int $id)
     {
         $courseItemTest = Tests::query()->with('course')->where('course_id', $id)->get();
         return view('admin/courses/allTests',['courseItemTest' => $courseItemTest, 'id' => $id ]);
     }
 
-    public function show()
+    public function show($id)
     {
 
+        $test = Tests::find($id);
+        $questions = new Questions();
+        $answers = new Answers();
+        $question_id = $questions::query()->where('test_id', $id)->get();
+
+
+        foreach ($question_id as $item)
+        {
+            $questionFind = $questions::findOrFail($item->id); // ищем нужный вопрос
+            $questionId = $questionFind['id'];
+            $answer_id = $answers::query()->where('question_id', $questionId)->get(); //массив с ответами для конкретного вопроса
+           }
+
+        return view('admin/courses/showTest', ['test' => $test, 'id' => $id, 'question_id' => $question_id, 'answer_id' => $answer_id ]);
     }
+
+    public function testEdit($id)
+    {
+        $test = Tests::find($id);
+        return view('admin/courses/testEdit', ['test' => $test, 'id' => $id, ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+
+        ]);
+
+        $test = Tests::find($id);
+        $test->name = $request->get('name');
+
+        $test->save();
+        return redirect(Route('courses-testIndex'))->with('success', 'Тест обновлён!');
+    }
+
 
     public function destroy($id)
     {
