@@ -54,19 +54,19 @@
                         @endforeach
                     </select>
                 <div class="form-group">
-                    <label for="user-address">Course</label>
-                    <div class="dropdown">
-                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Назначить курс
-                        </button>
-                        <div class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/">Курс 1</a></li>
-                            <li><a class="dropdown-item" href="#">Курс 2</a></li>
-                            <li><a class="dropdown-item" href="#">Курс 3</a></li>
-                        </div>
-                    </div>
-                </div>
-                <button class="btn btn-success">Отправить</button>
+{{--                    <label for="user-address">Course</label>--}}
+{{--                    <div class="dropdown">--}}
+{{--                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                            Назначить курс--}}
+{{--                        </button>--}}
+{{--                        <div class="dropdown-menu">--}}
+{{--                            <li><a class="dropdown-item" href="/">Курс 1</a></li>--}}
+{{--                            <li><a class="dropdown-item" href="#">Курс 2</a></li>--}}
+{{--                            <li><a class="dropdown-item" href="#">Курс 3</a></li>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+                <button class="btn btn-success col-md-3">Отправить</button>
             </form>
         </div>
     </div>

@@ -21,7 +21,7 @@ class CourseItemsController extends Controller
         $request->validate([
             'description'   => 'required',
             'text'          => 'required',
-            'image'         =>  'required|image|max:2048'
+            'image'         =>  'image|max:2048'
         ]);
         /**
          * @var UploadedFile $image
@@ -33,6 +33,16 @@ class CourseItemsController extends Controller
                 'text' => $request->get('text'),
                 'course_id' => $id,
                 'image'   =>   $path
+            ]);
+
+            $courseItem->save();
+
+            return redirect(Route('courses-index', $id));
+        }else{
+            $courseItem = new CourseItems([
+                'description' => $request->get('description'),
+                'text' => $request->get('text'),
+                'course_id' => $id,
             ]);
 
             $courseItem->save();

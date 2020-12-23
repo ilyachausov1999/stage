@@ -27,8 +27,7 @@ class CreateTestRequest extends FormRequest
             'name' => 'required|min:5|max:255|string',
             'questions' => 'array|max:100',
             'questions.*.answers' => 'array|min:2',
-
-
+            'image'    =>  'required|image|max:2048'
         ];
     }
 

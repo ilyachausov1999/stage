@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignmentsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/{id}/update', 'App\Http\Controllers\Admin\CoursesController@update')->name('update');
             Route::get('/{id}/edit', 'App\Http\Controllers\Admin\CoursesController@edit')->name('edit');
             Route::get('/{id}/delete', 'App\Http\Controllers\Admin\CoursesController@delete')->name('delete');
+            Route::get('/{image}/del', 'App\Http\Controllers\Admin\CoursesController@deleteImage')->name('deleteimg');
             Route::get('/{id}/view', 'App\Http\Controllers\Admin\CoursesController@view')->name('view');
             Route::post('/submit', 'App\Http\Controllers\Admin\CoursesController@submit')->name('submit');
             Route::get('', 'App\Http\Controllers\Admin\CoursesController@getAll')->name('all');
@@ -78,7 +80,12 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('file/{filePath?}', \App\Http\Controllers\FileController::class . '@getFile')->name('file.get');
-//CoursesController
+
+Route::prefix('admin')->group(function (){
+    Route::get('assignments', AssignmentsController::class . '@index')->name('assignments.index');
+    Route::post('user/{id}/assign', AssignmentsController::class . '@store')->name('assignments.store');
+    Route::delete('user/{userid}/assignments/{id}/delete', AssignmentsController::class . '@destroy')->name('assignments.delete');
+});
 
 
 //Route::middleware()

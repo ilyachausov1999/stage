@@ -8,11 +8,13 @@
         </div>
         <div class="form-group">
             <label>Изображение</label>
-            <input type="file" name="image" class="form-control" value="{{$data->name}}">
+            @if($image)
+            <img src="{{ route('file.get',$data->image) }}" class="rounded" width='50' height='50'>
+            @endif
+            <input type="file" name="image" class="form-control">
             <h5>* максимальный размер изображения 1мб</h5>
         </div>
         @include('errors.errors')
         <input type="submit" name="submit" value="Сохранить" class="btn btn-success btn-lg">
-
     </form>
 </div>
