@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/{id}/update', 'App\Http\Controllers\Admin\CoursesController@update')->name('update');
             Route::get('/{id}/edit', 'App\Http\Controllers\Admin\CoursesController@edit')->name('edit');
             Route::get('/{id}/delete', 'App\Http\Controllers\Admin\CoursesController@delete')->name('delete');
+            Route::get('/{image}/del', 'App\Http\Controllers\Admin\CoursesController@deleteImage')->name('deleteimg');
             Route::get('/{id}/view', 'App\Http\Controllers\Admin\CoursesController@view')->name('view');
             Route::post('/submit', 'App\Http\Controllers\Admin\CoursesController@submit')->name('submit');
             Route::get('', 'App\Http\Controllers\Admin\CoursesController@getAll')->name('all');
@@ -50,7 +51,8 @@ Route::middleware(['auth'])->group(function () {
             Route::post('{id}/content-blocks', 'App\Http\Controllers\CourseItemsController@store')->name('store');
             //tests
             //Route::get('{id}/content-blocks/tests', 'App\Http\Controllers\TestsController@index')->name('index');
-
+            Route::get('{id}/tests', 'App\Http\Controllers\TestsController@testIndex')->name('testIndex');
+            Route::delete('{id}/tests/delete', 'App\Http\Controllers\TestsController@destroy')->name('destroy');
             Route::get('{id}/test-block', 'App\Http\Controllers\TestsController@test')->name('test');
             Route::post('{id}/blocks-test', 'App\Http\Controllers\TestsController@testStore')->name('testStore');
         });
