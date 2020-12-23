@@ -1,13 +1,23 @@
 @extends('layouts.template')
+
 @section('content')
-    <a href="{{route('courses-test' , $id)}}" class="btn btn-success">Добавить тест</a>
+    <div class = " col-md-2  "  style = "background: white; border-radius: 10px; border: 4px double black;">
+        <ul class="nav col-md-10">
+            <li><a href="{{ route('users.index') }}">Просмотр пользователей</a></li>
+            <li><a href="{{ route('users.create') }}">Добавить пользователя</a></li>
+            <li><a href="{{ route('courses-all') }}">Просмотр  курсов</a></li>
+            <li><a href="{{ route('courses-create') }}">Добавить курс</a></li>
+        </ul>
+    </div>
 
-    @if(session()->get('success'))
-        <div class="alert alert-success mt-3">
-            {{ session()->get('success') }}
-        </div>
-    @endif
+    <div class="container">
+        <a href="{{route('courses-test' , $id)}}" class="btn btn-success" style="align-self: ">Добавить тест</a>
 
+        @if(session()->get('success'))
+            <div class="alert alert-success mt-3">
+                {{ session()->get('success') }}
+            </div>
+        @endif
     <table class="table mt-3"  >
         <thead>
         <tr>
@@ -39,5 +49,7 @@
 
         </tbody>
     </table>
+    </div>
 
 @endsection
+
