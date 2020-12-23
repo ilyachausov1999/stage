@@ -29,16 +29,21 @@ class TestsController
         $test = Tests::find($id);
         $questions = new Questions();
         $answers = new Answers();
-        $question_id = $questions::query()->where('test_id', $id)->get();
-
-
-        foreach ($question_id as $item)
+        $question_id = $questions::query()->with('answers')->where('test_id', $id)->get();
+        foreach ($question_id as $question)
         {
-            $questionFind = $questions::findOrFail($item->id); // ищем нужный вопрос
-            $questionId = $questionFind['id'];
-            $answer_id = $answers::query()->where('question_id', $questionId)->get(); //массив с ответами для конкретного вопроса
-           }
+            $questionId[] = $question['id'];
+            foreach ($questionId as $item) {
+                $answer_id = $answers::query()->where('question_id', $item)->get();
 
+            }
+
+//            foreach ($answer_id as $value)
+//            {
+//                $ansArr[] = $value->answer;
+//            }
+        }
+          //массив с ответами для конкретного вопроса
         return view('admin/courses/showTest', ['test' => $test, 'id' => $id, 'question_id' => $question_id, 'answer_id' => $answer_id ]);
     }
 
