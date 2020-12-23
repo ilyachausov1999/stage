@@ -11,9 +11,10 @@ class AssignmentsController extends Controller
 {
     public function index()
     {
-        $usersHasAssign = Users::with('courses')->has('assignments')->get();
+        $usersHasAssign = Assignments::with(['users', 'courses'])->get();
 
-        return view('admin/assignments', ['assignments'  => $usersHasAssign]);
+        return view('admin/assignments', ['assignments' => $usersHasAssign]);
+
     }
 
 
