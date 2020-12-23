@@ -24,7 +24,8 @@ class createCoursesRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name'     =>  'required|string|min:1|max:255',
+            'image'    =>  'image|max:2048'
         ];
     }
 }

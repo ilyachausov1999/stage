@@ -1,38 +1,37 @@
 @extends('layouts.template')
 @section('content')
 
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Контентые блоки по курсу </title>
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-                integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-                crossorigin="anonymous"></script>
-        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-    </head>
+<html lang="en">
 
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <title>Контентые блоки по курсу </title>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+</head>
+
+<body>
 
 
     <div class="container">
 
         @foreach($courseItems as $courseItem)
-            <div class="card" style="width: 100%;">
-                <h5 class="card-header"><b>Заголовок : {{ $courseItem->description }}</b></h5>
+        <div class="card" style="width: 100%;">
+        <img src="{{ route('file.get',$courseItem->image) }}" class="rounded" width='200' height='200'>
+            <h5 class="card-header"><b>Заголовок : {{ $courseItem->description }}</b></h5>
+            <hr>
+            <div class="card-body">
+                {!! $courseItem->text !!}
                 <hr>
-                <div class="card-body">
-                    {!! $courseItem->text !!}
-                    <hr>
-                </div>
             </div>
+        </div>
         @endforeach
 
 
         <div class="dropdown">
 
-            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Добавить контентый блок
             </button>
             <div class="dropdown-menu" style="width: 100%">
@@ -60,7 +59,7 @@
                                     ['color', ['color']],
                                     ['para', ['ul', 'ol', 'paragraph']],
                                     ['table', ['table']],
-                                    ['view', ['fullscreen', 'codeview',]]
+                                    ['view', ['fullscreen', 'codeview', ]]
                                 ]
 
                             });
@@ -68,10 +67,10 @@
                     </div>
 
                     <div class="form-group">
-                    <label>Изображение</label>
-                    <input type="file" name="image" class="form-control">
-                    <h5>* максимальный размер изображения 1мб</h5>
-                </div>
+                        <label>Изображение</label>
+                        <input type="file" name="image" class="form-control">
+                        <h5>* максимальный размер изображения 1мб</h5>
+                    </div>
 
 
                     <button class="btn btn-success" type="submit">Добавить блок</button>
@@ -79,9 +78,8 @@
 
             </div>
             <a href="/admin/courses" class="btn btn-primary" type="submit">На страницу курсов</a>
-            <a href="{{route('courses-test' , $id)}}" class="btn btn-primary" type="submit">Добавить тест</a>
+            <a href="{{route('courses-testIndex' , $id)}}" class="btn btn-primary" type="submit">Добавить тест</a>
         </div>
     </div>
 
-@endsection
-
+    @endsection
