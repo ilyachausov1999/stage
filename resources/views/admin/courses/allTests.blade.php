@@ -26,8 +26,8 @@
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->created_at }}</td>
                 <td class="table-buttons">
-{{--                    <a href="{{ route('tests.show', $item) }}" class="btn btn-success">Показать</a>--}}
-{{--                    <a href="{{ route('user.edit', $user) }}" class="btn btn-primary">Редактировать</a>--}}
+                    <a href="{{ route('courses-show', $item) }}" class="btn btn-success">Показать</a>
+                    <a href="{{ route('courses-testEdit', $item) }}" class="btn btn-primary">Редактировать</a>
                     <form method="post" action =  "{{ route('courses-destroy', $item->id) }}">
                         @csrf
                         @method('DELETE')

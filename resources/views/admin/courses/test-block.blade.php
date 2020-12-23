@@ -3,17 +3,26 @@
 @section('content')
 
 <div class="container">
-    <div div class="col-xs-12 col-md-2 rounded " style=" border-radius: 10px; border: 4px double black;">
-        @foreach($courseItemTest as $item)
+    <div  class = "col-xs-12 col-md-2 rounded "  style = " border-radius: 10px; border: 4px double black;">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        
         <div class="card" style="width: 100%;">
-            <h5 class="card-header"><b>Заголовок : {{ $item->name }}</b></h5>
+
         </div>
-        @endforeach
+
     </div>
 
     <div>
-        <h3>Добавить блок-тест</h3>
-        <div style="width: 100%">
+             <h3>Добавить блок-тест</h3>
+        <div  style="width: 100%">
             <form method="POST" enctype="multipart/form-data" action="{{ route('courses-testStore', $id) }}">
                 @csrf
 
