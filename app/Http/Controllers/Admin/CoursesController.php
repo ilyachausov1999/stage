@@ -23,7 +23,7 @@ class CoursesController extends Controller
     {
         $req->validate([
             'name'     =>  'required|string|min:1|max:255',
-            'image'         =>  'required|image|max:2048'
+            'image'    =>  'required|image|max:2048'
         ]);
         /**
          * @var UploadedFile $image
