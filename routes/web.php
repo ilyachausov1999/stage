@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/{id}/update', 'App\Http\Controllers\Admin\CoursesController@update')->name('update');
             Route::get('/{id}/edit', 'App\Http\Controllers\Admin\CoursesController@edit')->name('edit');
             Route::get('/{id}/delete', 'App\Http\Controllers\Admin\CoursesController@delete')->name('delete');
+            Route::get('/{image}/del', 'App\Http\Controllers\Admin\CoursesController@deleteImage')->name('deleteimg');
             Route::get('/{id}/view', 'App\Http\Controllers\Admin\CoursesController@view')->name('view');
             Route::post('/submit', 'App\Http\Controllers\Admin\CoursesController@submit')->name('submit');
             Route::get('', 'App\Http\Controllers\Admin\CoursesController@getAll')->name('all');

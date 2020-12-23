@@ -25,7 +25,7 @@ class createCoursesRequest extends FormRequest
     {
         return [
             'name'     =>  'required|string|min:1|max:255',
-            'image'    =>  'required|image|max:2048'
+            'image'    =>  'image|max:2048'
         ];
     }
 }
