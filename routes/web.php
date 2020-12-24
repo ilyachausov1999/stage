@@ -69,7 +69,9 @@ Route::prefix('admin')->group(function () {
     Route::delete('user/{id}/delete', UsersController::class . '@destroy')->name('users.delete');
     Route::get('user/{id}/update', UsersController::class . '@edit')->name('users.edit');
     Route::put('user/{id}/update', UsersController::class . '@update')->name('users.update');
-
+    Route::get('assignments', AssignmentsController::class . '@index')->name('assignments.index');
+    Route::post('user/{id}/assign', AssignmentsController::class . '@store')->name('assignments.store');
+    Route::delete('assignments/{id}/delete', AssignmentsController::class . '@destroy')->name('assignments.delete');
 
 
     //RegisterController
@@ -81,12 +83,6 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('file/{filePath?}', \App\Http\Controllers\FileController::class . '@getFile')->name('file.get');
-
-Route::prefix('admin')->group(function (){
-    Route::get('assignments', AssignmentsController::class . '@index')->name('assignments.index');
-    Route::post('user/{id}/assign', AssignmentsController::class . '@store')->name('assignments.store');
-    Route::delete('assignments/{id}/delete', AssignmentsController::class . '@destroy')->name('assignments.delete');
-});
 
 
 //Route::middleware()

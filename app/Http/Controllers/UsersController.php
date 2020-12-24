@@ -51,7 +51,7 @@ class UsersController extends Controller
             'name' => 'required',
             'surname' => 'required',
             'birthdate' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users',
             'password' => 'required',
 
         ]);
@@ -87,7 +87,9 @@ class UsersController extends Controller
 
         $user->delete();
 
-        return redirect(route('users.index'));
+        return redirect(route('users.index'))
+            ->with('status', "Удален пользователь $user->name $user->surname");
+
 
     }
     public function edit($id)

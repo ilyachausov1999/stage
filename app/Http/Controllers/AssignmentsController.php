@@ -54,7 +54,7 @@ class AssignmentsController extends Controller
         }
 
         return redirect(Route('assignments.index'))
-            ->with(['success' => "Назначение на курс с id [$id] удалено"]);
+            ->with(['status' => "Назначение на курс с id $id отменено"]);
     }
 
 }
