@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AssignmentsController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -60,12 +61,12 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::prefix('admin')->group(function () {
-    Route::get('users', \App\Http\Controllers\UsersController::class . '@index')->name('users.index');
-    Route::get('user/create', \App\Http\Controllers\UsersController::class . '@create')->name('users.create');
-    Route::post('user/store', \App\Http\Controllers\UsersController::class . '@store')->name('users.store');
-    Route::delete('user/{id}/delete', \App\Http\Controllers\UsersController::class . '@destroy')->name('users.delete');
-    Route::get('user/{id}/update', \App\Http\Controllers\UsersController::class . '@edit')->name('users.edit');
-    Route::put('user/{id}/update', \App\Http\Controllers\UsersController::class . '@update')->name('users.update');
+    Route::get('users', UsersController::class . '@index')->name('users.index');
+    Route::get('user/create', UsersController::class . '@create')->name('users.create');
+    Route::post('user/store', UsersController::class . '@store')->name('users.store');
+    Route::delete('user/{id}/delete', UsersController::class . '@destroy')->name('users.delete');
+    Route::get('user/{id}/update', UsersController::class . '@edit')->name('users.edit');
+    Route::put('user/{id}/update', UsersController::class . '@update')->name('users.update');
 
 
 

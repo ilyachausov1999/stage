@@ -4,17 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Assignments;
 use Illuminate\Http\Request;
-use  App\Models\Users;
-use Illuminate\Support\Facades\Validator;
-
+use App\Models\Users;
 class AssignmentsController extends Controller
 {
     public function index()
     {
 
         $usersHasAssign = Assignments::with(['users', 'courses'])->get();
-
-//        dd($usersHasAssign);
 
         return view('admin/assignments', ['assignments' => $usersHasAssign]);
     }
@@ -24,22 +20,27 @@ class AssignmentsController extends Controller
     {
         $user = Users::query()->findOrFail($id);
 
-        $validator = Validator::make($request->all(), [
-//            'courses_id' => 'required',
+        $checkOut = Assignments::query()->where([
+            ['courses_id', $request->get('course')],
+            ['users_id', $user['id']]
+        ])->first();
 
-        ]);
-        if ($validator->fails()) {
-            return redirect(Route('assignments.index'));
+        if (!$checkOut) {
+            $assign = new Assignments(
+
+                [
+                    'courses_id' => $request->get('course'),
+                    'users_id' => $user['id'],
+
+                ]);
+            $assign->save();
+            return redirect(Route('assignments.index'))
+                ->with('status', "Назначен курс для пользователя $user->name $user->surname");
         }
-        $assign = new Assignments(
 
-            [
-                'courses_id' => $request->get('course'),
-                'users_id' => $user['id'],
+        return redirect(Route('users.index'))
+            ->with('status', 'У этого пользователя уже есть данный курс');
 
-            ]);
-        $assign->save();
-        return redirect(Route('assignments.index'));
     }
 
     public function destroy($id)
@@ -47,7 +48,10 @@ class AssignmentsController extends Controller
 
         $assign = Assignments::query()->find($id);
 
-        $assign->delete();
+        try {
+            $assign->delete();
+        } catch (\Exception $e) {
+        }
 
         return redirect(Route('assignments.index'))
             ->with(['success' => "Назначение на курс с id [$id] удалено"]);
