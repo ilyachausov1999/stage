@@ -11,9 +11,9 @@
     </div>
 
 <div class="container">
-    <div >
+
              <h3>Создать тест</h3>
-    <div  class = "col-xs-12 col-md-2 rounded "  style = " border-radius: 10px; border: 4px double black;">
+    <div  class = "col-xs-12 col-md-2" >
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -24,9 +24,6 @@
             </div>
         @endif
 
-        <div class="card" style="width: 100%;">
-
-        </div>
 
     </div>
 
@@ -39,34 +36,6 @@
                 <div class="form-group">
                     <label for="content-title">Название теста</label>
                     <input type="text" name="name" value="" class="form-control " id="content-title">
-                </div>
-
-                <div class="form-group">
-                    <label for="content-title">Вопрос</label>
-                    <input type="text" name="questions[0][name]" value="" class="form-control " id="content-title">
-                </div>
-                <div class="form-group">
-                    <label>Изображение</label>
-                    <input type="file" name="image" class="form-control">
-                    <h5>* максимальный размер изображения 1мб</h5>
-                </div>
-                <div class="form-group">
-                    <label for="content-title">Ответ</label>
-                    <input type="text" name="questions[0][answers][0][answer]" value="" class="form-control " id="content-title">
-                    <input type="checkbox" class="form-check-input" name="questions[0][answers][0][is_correct]" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Верный ответ</label>
-                </div>
-                <div class="form-group">
-                    <label for="content-title">Ответ</label>
-                    <input type="text" name="questions[0][answers][1][answer]" value="" class="form-control " id="content-title">
-                    <input type="checkbox" class="form-check-input" name="questions[0][answers][1][is_correct]" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Верный ответ</label>
-                </div>
-                <div class="form-group">
-                    <label for="content-title">Ответ</label>
-                    <input type="text" name="questions[0][answers][2][answer]" value="" class="form-control " id="content-title">
-                    <input type="checkbox" class="form-check-input" name="questions[0][answers][2][is_correct]" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Верный ответ</label>
                 </div>
 
                 <button class="btn btn-success" type="button" onclick="add_question()">Добавить вопрос</button>

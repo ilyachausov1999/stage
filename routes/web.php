@@ -54,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('{id}/tests', 'App\Http\Controllers\TestsController@testIndex')->name('testIndex');
             Route::get('{id}/tests/show', 'App\Http\Controllers\TestsController@show')->name('show');
             Route::get('{id}/tests/edit', 'App\Http\Controllers\TestsController@testEdit')->name('testEdit');
+            Route::patch('{id}/tests/update', 'App\Http\Controllers\TestsController@testUpdate')->name('testUpdate');
             Route::delete('{id}/tests/delete', 'App\Http\Controllers\TestsController@destroy')->name('destroy');
             Route::get('{id}/create', 'App\Http\Controllers\TestsController@testCreate')->name('testCreate');
             Route::post('{id}/blocks-test', 'App\Http\Controllers\TestsController@testStore')->name('testStore');

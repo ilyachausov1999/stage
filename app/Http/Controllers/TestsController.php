@@ -33,21 +33,37 @@ class TestsController
 
     public function testEdit($id)
     {
-        $test = Test::find($id);
-        return view('admin/courses/testEdit', ['test' => $test, 'id' => $id, ]);
+        $test = Test::with(['questions.answers'])->find($id);
+        return view('admin/courses/testEdit', ['test' => $test ]);
     }
 
-    public function update(Request $request, $id)
+    public function testUpdate(Request $request, $id)
     {
+
         $request->validate([
 
         ]);
+        $test = Test::with(['questions.answers'])->find($id);
+        $test::find($id)->update(['name' => $request->get('name')]);
+//        $test->name = $request->get('name');
+//
 
-        $test = Test::find($id);
-        $test->name = $request->get('name');
+        $questions = $test->questions;
+        foreach ($questions as $question) {
+            $questionId = $question['id'];
+            Question::find($questionId)->update(['question' => $request->get('questions-' . $questionId)]);
 
-        $test->save();
-        return redirect(Route('courses-testIndex'))->with('success', 'Тест обновлён!');
+        }
+
+        $answers = $question->answers;
+        foreach ($answers as $answer)
+        {
+            $answerId = $answer['id'];
+            Answer::find($answerId)->update(['answer' => $request->get('answers-' . $answerId)]);
+        }
+
+
+        return redirect(Route('courses-testIndex', $test->course_id))->with('success', 'Тест обновлён!');
     }
 
 
@@ -76,10 +92,15 @@ class TestsController
         return view('admin/courses/test-block', ['courseItemTest' => $courseItemTest, 'id' => $id]);
     }
 
-    public function testStore(CreateTestRequest $request, int $id)
+    public function testStore(Request $request, int $id)
     {
-        $questionsData = $request->get('questions');
 
+        $request->validate([
+            'name' => 'required|min:2|max:255|string',
+
+           ]);
+
+        $questionsData = $request->get('questions');
         DB::beginTransaction();
 
         try {
@@ -91,9 +112,16 @@ class TestsController
 
             foreach ($questionsData as $questionItem) {
                 if (!isset($questionItem['name'])) {
+                    $request->validate([
+//                       $questionItem['name'] => 'required',
+
+                       'question' => 'required|string|min:5|max:255',
+
+                    ]);
                     continue;
                 }
                 $answersData = $questionItem['answers'];
+
                 /**
                  * @var Question $question
                  */
@@ -119,12 +147,18 @@ class TestsController
                             ]
                         );
                 }
+
                 $preparedAnswerData = array_map(function ($value) {
                     $isCorrect = isset($value['is_correct']) && $value['is_correct'] === 'on';
+
                     return ['answer' => $value['answer'], 'is_correct' => $isCorrect];
                 }, $answersData);
 
                 if (count($preparedAnswerData)) {
+//                    $request->validate([
+//                        'answer' => 'required|string|max:255',
+//                    ]);
+
                     $question->answers()->createMany($preparedAnswerData);
                 }
             }
