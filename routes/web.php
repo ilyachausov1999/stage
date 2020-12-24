@@ -85,7 +85,6 @@ Route::prefix('admin')->group(function () {
 Route::get('file/{filePath?}', \App\Http\Controllers\FileController::class . '@getFile')->name('file.get');
 
 
-//Route::middleware()
 //Route::post('/admin/courses/{id}/edit/content', 'App\Http\Controllers\CourseItemsController@index')->name('index');
 
 //Пользовательская часть
