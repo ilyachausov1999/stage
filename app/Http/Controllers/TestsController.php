@@ -52,19 +52,48 @@ class TestsController
         foreach ($questions as $question) {
             $questionId = $question['id'];
             Question::find($questionId)->update(['question' => $request->get('questions-' . $questionId)]);
+            $answers = $question->answers;
+            foreach ($answers as $answer)
+            {
+                $answerId = $answer['id'];
+                $isCorrect = $request->get('is_correct-' . $answerId);
+                if ($isCorrect === 1 or $isCorrect === 'on')
+                {
+                    $isCorrect1 = 1;
+
+                } else {
+                    $isCorrect1 = 0;
+                }
+                Answer::find($answerId)->update(['answer' => $request->get('answers-' . $answerId),
+                                                  'is_correct' => $isCorrect1 ]);
+            }
 
         }
 
-        $answers = $question->answers;
-        foreach ($answers as $answer)
-        {
-            $answerId = $answer['id'];
-            Answer::find($answerId)->update(['answer' => $request->get('answers-' . $answerId)]);
-        }
+
 
 
         return redirect(Route('courses-testIndex', $test->course_id))->with('success', 'Тест обновлён!');
     }
+//
+//            foreach ($answers as $answer)
+//        {
+//
+//            $isCorrectId = $answer['id'];
+//            $isCorrect = $request->get('is_correct-' . $isCorrectId);
+//            if ($isCorrect === 1 or $isCorrect === 'on')
+//            {
+//                $isCorrect1 = 1;
+//
+//            } else {
+//                $isCorrect1 = 0;
+//            }
+//            Answer::find($isCorrectId)->update(['is_correct' => $isCorrect1]);
+//
+//            dd($request->get('is_correct-' . $isCorrectId));
+//        }
+
+
 
 
     public function destroy($id)
