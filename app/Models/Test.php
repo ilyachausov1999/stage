@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property int $course_id
  */
-class Tests extends Model
+class Test extends Model
 {
 
     public $table = 'tests';
@@ -21,13 +21,13 @@ class Tests extends Model
         'course_id',
     ];
 
-    public function course()
+    public function courses()
     {
         return $this->belongsTo(Courses::class);
     }
 
     public function questions()
     {
-        return $this->hasMany(Questions::class, 'test_id');
+        return $this->hasMany(Question::class, 'test_id', 'id');
     }
 }

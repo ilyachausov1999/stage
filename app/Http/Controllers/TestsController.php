@@ -4,14 +4,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTestRequest;
-use App\Models\Answers;
-use App\Models\Questions;
-use App\Models\Tests;
+use App\Models\Answer;
+use App\Models\Question;
+use App\Models\Test;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use PHPUnit\Util\Test;
+
 
 class TestsController
 {
@@ -19,32 +19,21 @@ class TestsController
 
     public function testIndex(int $id)
     {
-        $courseItemTest = Tests::query()->with('course')->where('course_id', $id)->get();
+        $courseItemTest = Test::query()->with('courses')->where('course_id', $id)->get();
         return view('admin/courses/allTests', ['courseItemTest' => $courseItemTest, 'id' => $id]);
     }
 
     public function show($id)
     {
 
-        $test = Tests::find($id);
-        $questions = new Questions();
-        $answers = new Answers();
-        $question_id = $questions::query()->where('test_id', $id)->get();
+        $test = Test::with(['questions.answers'])->find($id);
 
-
-        foreach ($question_id as $item)
-        {
-            $questionFind = $questions::findOrFail($item->id); // ищем нужный вопрос
-            $questionId = $questionFind['id'];
-            $answer_id = $answers::query()->where('question_id', $questionId)->get(); //массив с ответами для конкретного вопроса
-           }
-
-        return view('admin/courses/showTest', ['test' => $test, 'id' => $id, 'question_id' => $question_id, 'answer_id' => $answer_id ]);
+        return view('admin/courses/showTest', ['test' => $test]);
     }
 
     public function testEdit($id)
     {
-        $test = Tests::find($id);
+        $test = Test::find($id);
         return view('admin/courses/testEdit', ['test' => $test, 'id' => $id, ]);
     }
 
@@ -54,7 +43,7 @@ class TestsController
 
         ]);
 
-        $test = Tests::find($id);
+        $test = Test::find($id);
         $test->name = $request->get('name');
 
         $test->save();
@@ -65,7 +54,7 @@ class TestsController
     public function destroy($id)
     {
 
-        $question = new Questions();
+        $question = new Question();
         $question_id = $question::query()->with('answers')->where('test_id', $id)->get('id');
 
         foreach ($question_id as $item) {
@@ -74,16 +63,16 @@ class TestsController
             $questionFind->delete();
         }
 
-        $test = Tests::find($id);
+        $test = Test::find($id);
 
         $test->delete();
 
         return redirect(Route('courses-testIndex', $test->course_id))->with('success', 'Тест удалён');
     }
 
-    public function test(int $id)
+    public function testCreate(int $id)
     {
-        $courseItemTest = Tests::query()->with('course')->where('course_id', $id)->get();
+        $courseItemTest = Test::query()->with('courses')->where('course_id', $id)->get();
         return view('admin/courses/test-block', ['courseItemTest' => $courseItemTest, 'id' => $id]);
     }
 
@@ -94,7 +83,7 @@ class TestsController
         DB::beginTransaction();
 
         try {
-            $test = new Tests([
+            $test = new Test([
                 'name' => $request->get('name'),
                 'course_id' => $id,
             ]);
@@ -106,7 +95,7 @@ class TestsController
                 }
                 $answersData = $questionItem['answers'];
                 /**
-                 * @var Questions $question
+                 * @var Question $question
                  */
                 /**
                  * @var UploadedFile $image

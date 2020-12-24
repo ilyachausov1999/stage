@@ -11,7 +11,7 @@
     </div>
 
     <div class="container">
-        <a href="{{route('courses-test' , $id)}}" class="btn btn-success" style="align-self: ">Добавить тест</a>
+        <a href="{{route('courses-testCreate' , $id)}}" class="btn btn-success" style="align-self: ">Добавить тест</a>
 
         @if(session()->get('success'))
             <div class="alert alert-success mt-3">
