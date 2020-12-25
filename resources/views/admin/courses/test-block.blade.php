@@ -12,7 +12,7 @@
 
 <div class="container">
 
-             <h3>Создать тест</h3>
+
     <div  class = "col-xs-12 col-md-2" >
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -30,7 +30,7 @@
     <div>
              <h3>Создать тест</h3>
         <div  style="width: 100%">
-            <form method="POST" enctype="multipart/form-data" id="form" action="{{ route('courses-testStore', $id) }}">
+            <form method="POST" onsubmit="return" enctype="multipart/form-data" id="form" action="{{ route('courses-testStore', $id) }}">
                 @csrf
 
                 <div class="form-group">
@@ -45,6 +45,15 @@
         </div>
     </div>
             <script>
+                document.getElementById('form').onsubmit = function() {
+                    if(n > 0 && m > 0){
+                        return true;
+                    }else{
+                        alert('Добавьте поля Вопрос и Ответ!');
+                        return false;
+                    }
+                }
+
                 let n = 0;
                 function add_question(){
                     n = n + 1;
@@ -81,8 +90,6 @@
                     var pos5 = y.childElementCount;
                     y.insertBefore(new_field_img, y.childNodes[pos5]);
 
-
-
                     var z = 0;
                     z = z + 1;
                     if(z > 0){x = 0}
@@ -117,7 +124,6 @@
                     var pos = y.childElementCount;
                     y.insertBefore(new_field, y.childNodes[pos]);
                 }
-
             </script>
 
 </div>

@@ -45,8 +45,6 @@ class TestsController
         ]);
         $test = Test::with(['questions.answers'])->find($id);
         $test::find($id)->update(['name' => $request->get('name')]);
-//        $test->name = $request->get('name');
-//
 
         $questions = $test->questions;
         foreach ($questions as $question) {
@@ -70,31 +68,8 @@ class TestsController
 
         }
 
-
-
-
         return redirect(Route('courses-testIndex', $test->course_id))->with('success', 'Тест обновлён!');
     }
-//
-//            foreach ($answers as $answer)
-//        {
-//
-//            $isCorrectId = $answer['id'];
-//            $isCorrect = $request->get('is_correct-' . $isCorrectId);
-//            if ($isCorrect === 1 or $isCorrect === 'on')
-//            {
-//                $isCorrect1 = 1;
-//
-//            } else {
-//                $isCorrect1 = 0;
-//            }
-//            Answer::find($isCorrectId)->update(['is_correct' => $isCorrect1]);
-//
-//            dd($request->get('is_correct-' . $isCorrectId));
-//        }
-
-
-
 
     public function destroy($id)
     {

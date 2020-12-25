@@ -18,12 +18,14 @@
             @foreach($test->questions as $question)
                 <h4>Название вопроса : {{ $question->question}}</h4>
             <a><img src="{{ route('file.get',$question->image) }}" class="rounded" width='50' height='50'></a>
-                @foreach($answer_id as $answer)
-                    <h5>Вариант ответа : {{$answer->answer}}</h5>
+                @foreach($question->answers as $answer)
+                    <h5>Вариант ответа : {{$answer->answer}}
                         @if ( $answer->is_correct == 1 )
                              - Правильный ответ
-                            @endif
+                        @endif
+                    </h5>
                 @endforeach
+            @endforeach
         </div>
     </div>
     </div>
