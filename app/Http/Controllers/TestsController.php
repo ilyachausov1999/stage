@@ -77,11 +77,8 @@ class TestsController
 
         }
 
-
-        return redirect(Route('courses-testIndex', $test->course_id ))->with('success', 'Тест обновлён!');
+        return redirect(Route('courses-testIndex', $test->course_id))->with('success', 'Тест обновлён!');
     }
-
-
 
     public function destroy($id)
     {
