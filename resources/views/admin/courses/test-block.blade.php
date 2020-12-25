@@ -28,7 +28,7 @@
     </div>
 
     <div>
-             <h3>Добавить блок-тест</h3>
+             <h3>Создать тест</h3>
         <div  style="width: 100%">
             <form method="POST" enctype="multipart/form-data" id="form" action="{{ route('courses-testStore', $id) }}">
                 @csrf
