@@ -31,4 +31,15 @@ class CreateTestRequest extends FormRequest
         ];
     }
 
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Название теста обязательно! Тест должен содержать хотя бы один вопрос',
+            'questions.*.name.required' => 'Добавьте хотя-бы 1 вопрос c вариантом ответа',
+            'questions.*.answers.*.answer.required' => 'Добавьте хотя-бы 1 вариант ответа'
+        ];
+
+
+    }
 }
