@@ -25,14 +25,21 @@ class CreateTestRequest extends FormRequest
     {
         return [
             'name' => 'required|min:5|max:255|string',
-            'questions' => 'array|max:100',
-            'questions.*.answers' => 'array|min:2',
-            'image'    =>  'required|image|max:2048'
+            'questions.*.name' => 'required|string|max:100',
+            'questions.*.answers.*.answer' => 'required',
+            'image'    =>  'image|max:2048'
         ];
     }
 
-    public function failedValidation($validator)
+
+    public function messages()
     {
+        return [
+            'name.required' => 'Название теста обязательно! Тест должен содержать хотя бы один вопрос',
+            'questions.*.name.required' => 'Добавьте хотя-бы 1 вопрос c вариантом ответа',
+            'questions.*.answers.*.answer.required' => 'Добавьте хотя-бы 1 вариант ответа'
+        ];
+
 
     }
 }
