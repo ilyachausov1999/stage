@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Users;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -29,19 +30,19 @@ class UsersController extends Controller
 
         $users = Users::query()->with('role')->get();
 
-        $courses =DB::table('courses')
+        $courses = DB::table('courses')
             ->get();
 
         return view('admin/viewUsers', ['users' => $users, 'courses' => $courses]);
     }
 
 
-    public function create(): \Illuminate\Contracts\View\View
+    public function create(): View
     {
-        $roles =DB::table('roles')
+        $roles = DB::table('roles')
             ->get();
 
-        return view('admin/createUser' , ['roles' => $roles]);
+        return view('admin/createUser', ['roles' => $roles]);
     }
 
     public function store(Request $request)
@@ -51,7 +52,7 @@ class UsersController extends Controller
             'name' => 'required',
             'surname' => 'required',
             'birthdate' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users',
             'password' => 'required',
 
         ]);
@@ -59,21 +60,22 @@ class UsersController extends Controller
             return redirect(Route('users.create'))
                 ->withErrors($validator)
                 ->withInput();
-        }else {
-            $user = new Users([
-                'login' => $request->get('login'),
-                'name' => $request->get('name'),
-                'surname' => $request->get('surname'),
-                'email' => $request->get('email'),
-                'birthdate' => $request->get('birthdate'),
-                'password' => Hash::make($request->get('password')),
-                'role_id' => $request->get('role'),
-
-            ]);
-
-            $user->save();
-            return redirect(Route('users.index'));
         }
+
+        $user = new Users([
+            'login' => $request->get('login'),
+            'name' => $request->get('name'),
+            'surname' => $request->get('surname'),
+            'email' => $request->get('email'),
+            'birthdate' => $request->get('birthdate'),
+            'password' => Hash::make($request->get('password')),
+            'role_id' => $request->get('role'),
+
+        ]);
+
+        $user->save();
+        return redirect(Route('users.index'));
+
     }
 
     public function destroy($id)
@@ -87,18 +89,18 @@ class UsersController extends Controller
 
         $user->delete();
 
-        return redirect(route('users.index'));
-
+        return redirect(route('users.index'))
+            ->with('status', "Удален пользователь $user->name $user->surname");
     }
+
     public function edit($id)
     {
         $user = Users::query()->findOrFail($id);
 
-        $roles =DB::table('roles')
+        $roles = DB::table('roles')
             ->get();
 
         return view('admin/updateUser', ['user' => $user, 'roles' => $roles]);
-
     }
 
     public function update(Request $request, $id)
@@ -117,20 +119,21 @@ class UsersController extends Controller
         if ($validator->fails()) {
             return redirect(Route('users.edit', $user))
                 ->withErrors($validator);
-        } else {
-            /**
-             * @var Users|null $user
-             */
-            $user = Users::query()->findOrFail($id);
-            $user->login = $request->get('login');
-            $user->name = $request->get('name');
-            $user->surname = $request->get('surname');
-            $user->email = $request->get('email');
-            $user->birthdate = $request->get('birthdate');
-            $user->password = Hash::make($request->get('password'));
-            $user->role_id = $request->get('role');
-            $user->save();
-            return redirect(Route('users.index'));
         }
+
+        /**
+         * @var Users|null $user
+         */
+        $user = Users::query()->findOrFail($id);
+        $user->login = $request->get('login');
+        $user->name = $request->get('name');
+        $user->surname = $request->get('surname');
+        $user->email = $request->get('email');
+        $user->birthdate = $request->get('birthdate');
+        $user->password = Hash::make($request->get('password'));
+        $user->role_id = $request->get('role');
+        $user->save();
+        return redirect(Route('users.index'));
+
     }
 }

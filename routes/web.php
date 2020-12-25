@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AssignmentsController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,25 +16,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
 Route::get('/test-block', function () {
     return view('admin/courses/test-block');
 });
 
-Auth::routes();
-
 Route::get('/', function () {
-    return view('admin/login');
+    return view('layouts/custom');
 });
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-//RegisterController
+//Register
 Route::prefix('register')->group(function () {
     Route::get('', 'App\Http\Controllers\RegistrationController@register')->name('register');
     Route::post('', 'App\Http\Controllers\RegistrationController@postRegister')->name('post-register');
     Route::get('/confirm/{token}', 'App\Http\Controllers\RegistrationController@confirmEmail')->name('confirmEmail');
 });
+
 
 //CoursesController
 Route::middleware(['auth'])->group(function () {
@@ -54,41 +53,31 @@ Route::middleware(['auth'])->group(function () {
             Route::get('{id}/tests', 'App\Http\Controllers\TestsController@testIndex')->name('testIndex');
             Route::get('{id}/tests/show', 'App\Http\Controllers\TestsController@show')->name('show');
             Route::get('{id}/tests/edit', 'App\Http\Controllers\TestsController@testEdit')->name('testEdit');
+            Route::patch('{id}/tests/update', 'App\Http\Controllers\TestsController@testUpdate')->name('testUpdate');
             Route::delete('{id}/tests/delete', 'App\Http\Controllers\TestsController@destroy')->name('destroy');
-            Route::get('{id}/test-block', 'App\Http\Controllers\TestsController@test')->name('test');
+            Route::get('{id}/create', 'App\Http\Controllers\TestsController@testCreate')->name('testCreate');
             Route::post('{id}/blocks-test', 'App\Http\Controllers\TestsController@testStore')->name('testStore');
         });
     });
 });
-
-Route::prefix('admin')->group(function () {
-    Route::get('users', \App\Http\Controllers\UsersController::class . '@index')->name('users.index');
-    Route::get('user/create', \App\Http\Controllers\UsersController::class . '@create')->name('users.create');
-    Route::post('user/store', \App\Http\Controllers\UsersController::class . '@store')->name('users.store');
-    Route::delete('user/{id}/delete', \App\Http\Controllers\UsersController::class . '@destroy')->name('users.delete');
-    Route::get('user/{id}/update', \App\Http\Controllers\UsersController::class . '@edit')->name('users.edit');
-    Route::put('user/{id}/update', \App\Http\Controllers\UsersController::class . '@update')->name('users.update');
-
-
-
-    //RegisterController
-    Route::prefix('register')->group(function () {
-        Route::get('', 'App\Http\Controllers\RegistrationController@register')->name('register');
-        Route::post('', 'App\Http\Controllers\RegistrationController@postRegister')->name('post-register');
-        Route::get('/confirm/{token}', 'App\Http\Controllers\RegistrationController@confirmEmail')->name('confirmEmail');
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('users', UsersController::class . '@index')->name('users.index');
+        Route::get('user/create', UsersController::class . '@create')->name('users.create');
+        Route::post('user/store', UsersController::class . '@store')->name('users.store');
+        Route::delete('user/{id}/delete', UsersController::class . '@destroy')->name('users.delete');
+        Route::get('user/{id}/update', UsersController::class . '@edit')->name('users.edit');
+        Route::put('user/{id}/update', UsersController::class . '@update')->name('users.update');
+        Route::get('assignments', AssignmentsController::class . '@index')->name('assignments.index');
+        Route::post('user/{id}/assign', AssignmentsController::class . '@store')->name('assignments.store');
+        Route::delete('assignments/{id}/delete', AssignmentsController::class . '@destroy')->name('assignments.delete');
     });
 });
 
+
 Route::get('file/{filePath?}', \App\Http\Controllers\FileController::class . '@getFile')->name('file.get');
 
-Route::prefix('admin')->group(function (){
-    Route::get('assignments', AssignmentsController::class . '@index')->name('assignments.index');
-    Route::post('user/{id}/assign', AssignmentsController::class . '@store')->name('assignments.store');
-    Route::delete('assignments/{id}/delete', AssignmentsController::class . '@destroy')->name('assignments.delete');
-});
 
-
-//Route::middleware()
 //Route::post('/admin/courses/{id}/edit/content', 'App\Http\Controllers\CourseItemsController@index')->name('index');
 
 //Пользовательская часть
