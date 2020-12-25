@@ -8,7 +8,6 @@ use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Test;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -40,20 +39,30 @@ class TestsController
     public function testUpdate(Request $request, $id)
     {
 
-        $request->validate([
 
-        ]);
+
         $test = Test::with(['questions.answers'])->find($id);
+        $request->validate([
+            'name' => 'required',
+        ]);
         $test::find($id)->update(['name' => $request->get('name')]);
 
         $questions = $test->questions;
         foreach ($questions as $question) {
             $questionId = $question['id'];
+            $request->validate([
+                'questions-'.$questionId => 'required',
+            ]);
             Question::find($questionId)->update(['question' => $request->get('questions-' . $questionId)]);
             $answers = $question->answers;
             foreach ($answers as $answer)
             {
+
                 $answerId = $answer['id'];
+                $request->validate([
+                    'answers-'.$answerId => 'required',
+                ]);
+
                 $isCorrect = $request->get('is_correct-' . $answerId);
                 if ($isCorrect === 1 or $isCorrect === 'on')
                 {
@@ -96,13 +105,10 @@ class TestsController
         return view('admin/courses/test-block', ['courseItemTest' => $courseItemTest, 'id' => $id]);
     }
 
-    public function testStore(Request $request, int $id)
+    public function testStore(CreateTestRequest $request, int $id)
     {
 
-        $request->validate([
-            'name' => 'required|min:2|max:255|string',
-
-           ]);
+        $validated = $request->validated();
 
         $questionsData = $request->get('questions');
         DB::beginTransaction();
@@ -116,12 +122,7 @@ class TestsController
 
             foreach ($questionsData as $questionItem) {
                 if (!isset($questionItem['name'])) {
-                    $request->validate([
-//                       $questionItem['name'] => 'required',
-
-                       'question' => 'required|string|min:5|max:255',
-
-                    ]);
+//
                     continue;
                 }
                 $answersData = $questionItem['answers'];

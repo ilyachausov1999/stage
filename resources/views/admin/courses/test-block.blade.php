@@ -9,20 +9,20 @@
             <li><a href="{{ route('courses-create') }}">Добавить курс</a></li>
         </ul>
     </div>
+    @if ($errors->any())
+        <div class="alert alert-danger" style="width: 800px;" align="center">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
 <div class="container">
 
 
     <div  class = "col-xs-12 col-md-2" >
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
 
 
     </div>
