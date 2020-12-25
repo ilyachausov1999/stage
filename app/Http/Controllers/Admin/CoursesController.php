@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\createCoursesRequest;
 use App\Models\Courses;
+use App\Traits\RolesTrait;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -13,10 +14,11 @@ use Illuminate\Support\Facades\Storage;
 class CoursesController extends Controller
 {
     use ValidatesRequests;
+    use RolesTrait;
 
     public function create()
     {
-        return view('admin.createCourse');
+        return view('admin.createCourse', ['role' => $this->getRole()]);
     }
 
     public function submit(createCoursesRequest $req)
@@ -47,15 +49,17 @@ class CoursesController extends Controller
 
     public function getAll()
     {
+
         $course = Courses::paginate(5);
-        return view('admin.viewCourses', compact('course'));
+
+        return view('admin.viewCourses', ['course' => $course, 'role' => $this->getRole()]);
     }
 
     public function edit($id)
     {
         $course = Courses::find($id);
 
-        return view('admin.editCourse', ['data' => $course, 'image' => storage_path('app/' . $course['image'])]);
+        return view('admin.editCourse', ['data' => $course, 'role' => $this->getRole(), 'image' => storage_path('app/' . $course['image'])]);
     }
 
     public function delete($id)

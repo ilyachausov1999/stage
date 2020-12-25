@@ -4,6 +4,7 @@
             {{ session('status') }}
         </div>
     @endif
+    @if($role == 'admin')
     <table class="table table-striped ">
         <thead>
         <tr>
@@ -56,4 +57,50 @@
         @endforeach
     </table>
 </div>
+@endif
+@if($role == 'teacher')
+    <div class="container">
+        <table class="table table-striped ">
+            <thead>
+            <tr>
+                <th>Login</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Email</th>
+                <th>Назначение на курс</th>
+            </tr>
+            @foreach ($users as $userView)
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ $userView->login }}</td>
+                <td>{{ $userView->name }}</td>
+                <td>{{ $userView->surname }}</td>
+                <td>{{ $userView->email }}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-success dropdown-toggle col-md-8" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Назначить курс
+                        </button>
+                        <div class="dropdown-menu">
+                            <form name="course"  enctype="multipart/form-data" action="{{ route('assignments.store', $userView->id) }}" method="POST">
+                                @csrf
+                                <select name="course">
+                                    @foreach($courses as $course)
+                                        <option  value="{{$course->id}}">{{$course->name}}</option>
+                                    @endforeach
+                                </select>
+                                <button>Отправить</button>
+                            </form>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            @endforeach
+        </table>
+    </div>
+
+
+@endif
 

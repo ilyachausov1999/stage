@@ -4,7 +4,7 @@
         @csrf
         <div class="form-group">
             <label>Название</label>
-            <input name="name" class="form-control" value="{{$data->name}}">
+            <input name="name" class="form-control" value="{{$data->id}}">
         </div>
         <div class="form-group">
             <label>Изображение</label>
@@ -18,3 +18,4 @@
         <input type="submit" name="submit" value="Сохранить" class="btn btn-success btn-lg">
     </form>
 </div>
+

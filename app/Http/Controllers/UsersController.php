@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Users;
+use App\Traits\RolesTrait;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\RoleController;
+
 
 class UsersController extends Controller
 {
+
+    use RolesTrait;
 
     //view с пагинацией
 //    public function index()
@@ -33,7 +39,9 @@ class UsersController extends Controller
         $courses = DB::table('courses')
             ->get();
 
-        return view('admin/viewUsers', ['users' => $users, 'courses' => $courses]);
+        return view('admin/viewUsers', ['users' => $users, 'courses' => $courses, 'role' => $this->getRole()]);
+
+
     }
 
 
@@ -42,7 +50,7 @@ class UsersController extends Controller
         $roles = DB::table('roles')
             ->get();
 
-        return view('admin/createUser', ['roles' => $roles]);
+        return view('admin/createUser', ['roles' => $roles, 'role' => $this->getRole()]);
     }
 
     public function store(Request $request)
@@ -100,7 +108,7 @@ class UsersController extends Controller
         $roles = DB::table('roles')
             ->get();
 
-        return view('admin/updateUser', ['user' => $user, 'roles' => $roles]);
+        return view('admin/updateUser', ['user' => $user, 'roles' => $roles, 'role' => $this->getRole()]);
     }
 
     public function update(Request $request, $id)

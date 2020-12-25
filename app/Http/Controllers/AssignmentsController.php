@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assignments;
+use App\Traits\RolesTrait;
 use Illuminate\Http\Request;
 use App\Models\Users;
 class AssignmentsController extends Controller
 {
+    use RolesTrait;
     public function index()
     {
 
         $usersHasAssign = Assignments::with(['users', 'courses'])->get();
 
-        return view('admin/assignments', ['assignments' => $usersHasAssign]);
+        return view('admin/assignments', ['assignments' => $usersHasAssign, 'role' => $this->getRole()]);
     }
 
 

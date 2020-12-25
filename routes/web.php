@@ -60,6 +60,7 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 });
+
 Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('users', UsersController::class . '@index')->name('users.index');
@@ -73,6 +74,41 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('assignments/{id}/delete', AssignmentsController::class . '@destroy')->name('assignments.delete');
     });
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('teacher')->group(function () {
+        Route::get('users', UsersController::class . '@index')->name('teacher.users.index');
+        Route::get('assignments', AssignmentsController::class . '@index')->name('teacher.assignments.index');
+        Route::post('user/{id}/assign', AssignmentsController::class . '@store')->name('teacher.assignments.store');
+        Route::delete('assignments/{id}/delete', AssignmentsController::class . '@destroy')->name('teacher.assignments.delete');
+    });
+});
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('/teacher/courses')->group(function () {
+        Route::name('teacher-courses-')->group(function () {
+            Route::get('/create', 'App\Http\Controllers\Admin\CoursesController@create')->name('create');
+            Route::post('/{id}/update', 'App\Http\Controllers\Admin\CoursesController@update')->name('update');
+            Route::get('/{id}/edit', 'App\Http\Controllers\Admin\CoursesController@edit')->name('edit');
+            Route::get('/{id}/delete', 'App\Http\Controllers\Admin\CoursesController@delete')->name('delete');
+            Route::get('/{image}/del', 'App\Http\Controllers\Admin\CoursesController@deleteImage')->name('deleteimg');
+            Route::get('/{id}/view', 'App\Http\Controllers\Admin\CoursesController@view')->name('view');
+            Route::post('/submit', 'App\Http\Controllers\Admin\CoursesController@submit')->name('submit');
+            Route::get('', 'App\Http\Controllers\Admin\CoursesController@getAll')->name('all');
+            Route::get('{id}/content-blocks', 'App\Http\Controllers\CourseItemsController@index')->name('index');
+            Route::post('{id}/content-blocks', 'App\Http\Controllers\CourseItemsController@store')->name('store');
+            //tests
+            //Route::get('{id}/content-blocks/tests', 'App\Http\Controllers\TestsController@index')->name('index');
+            Route::get('{id}/tests', 'App\Http\Controllers\TestsController@testIndex')->name('testIndex');
+            Route::get('{id}/tests/show', 'App\Http\Controllers\TestsController@show')->name('show');
+            Route::get('{id}/tests/edit', 'App\Http\Controllers\TestsController@testEdit')->name('testEdit');
+            Route::patch('{id}/tests/update', 'App\Http\Controllers\TestsController@testUpdate')->name('testUpdate');
+            Route::delete('{id}/tests/delete', 'App\Http\Controllers\TestsController@destroy')->name('destroy');
+            Route::get('{id}/create', 'App\Http\Controllers\TestsController@testCreate')->name('testCreate');
+            Route::post('{id}/blocks-test', 'App\Http\Controllers\TestsController@testStore')->name('testStore');
+        });
+    });
+});
+
 
 
 Route::get('file/{filePath?}', \App\Http\Controllers\FileController::class . '@getFile')->name('file.get');
