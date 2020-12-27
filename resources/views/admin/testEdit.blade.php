@@ -1,6 +1,5 @@
 
-
-@extends('admin.layouts.updateUser')
+@extends('admin.courses.testEdit')
 
 @extends('admin.layouts.navbar')
 

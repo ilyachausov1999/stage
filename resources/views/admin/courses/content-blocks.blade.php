@@ -1,51 +1,37 @@
-@extends('layouts.template')
-@section('content')
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Контентые блоки по курсу </title>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+</head>
 
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Контентые блоки по курсу </title>
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-                integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-                crossorigin="anonymous"></script>
-        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-    </head>
+<body>
+<div class="container">
 
-    <body>
-    <div class = " col-md-2  "  style = "background: white; border-radius: 10px; border: 4px double black;">
-        <ul class="nav col-md-10">
-            <li><a href="{{ route('users.index') }}">Просмотр пользователей</a></li>
-            <li><a href="{{ route('teacher.assignments.index') }}">Просмотр назначений на курсы</a></li>
-            <li><a href="{{ route('users.create') }}">Добавить пользователя</a></li>
-            <li><a href="{{ route('courses-all') }}">Просмотр  курсов</a></li>
-            <li><a href="{{ route('courses-create') }}">Добавить курс</a></li>
-        </ul>
-    </div>
-
-
-    <div class="container">
-
-        @foreach($courseItems as $courseItem)
-            <div class="card" style="width: 100%;">
-                <h5 class="card-header"><b>Заголовок : {{ $courseItem->description }}</b></h5>
+    @foreach($courseItems as $courseItem)
+        <div class="card" style="width: 100%;">
+            <h5 class="card-header"><b>Заголовок : {{ $courseItem->description }}</b></h5>
+            <hr>
+            <div class="card-body">
+                {!! $courseItem->text !!}
                 <hr>
-                <div class="card-body">
-                    {!! $courseItem->text !!}
-                    <hr>
-                </div>
             </div>
-        @endforeach
+        </div>
+    @endforeach
 
 
-        <div class="dropdown">
+    <div class="dropdown">
 
-            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                Добавить контентый блок
-            </button>
-            <div class="dropdown-menu" style="width: 100%">
-                <form method="POST" enctype="multipart/form-data" action="{{ route('courses-store', $id) }}">
+        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            Добавить контентый блок
+        </button>
+        <div class="dropdown-menu" style="width: 100%">
+                <form method="POST" enctype="multipart/form-data" action="{{ route($role .'.courses-store', $id) }}">
                     @csrf
 
                     <div class="form-group">
@@ -77,20 +63,20 @@
                     </div>
 
                     <div class="form-group">
-                    <label>Изображение</label>
-                    <input type="file" name="image" class="form-control">
-                    <h5>* максимальный размер изображения 1мб</h5>
-                </div>
+                        <label>Изображение</label>
+                        <input type="file" name="image" class="form-control">
+                        <h5>* максимальный размер изображения 1мб</h5>
+                    </div>
 
 
                     <button class="btn btn-success" type="submit">Добавить блок</button>
                 </form>
 
-            </div>
-            <a href="/admin/courses" class="btn btn-primary" type="submit">На страницу курсов</a>
-            <a href="{{route('courses-testIndex' , $id)}}" class="btn btn-primary" type="submit">Добавить тест</a>
         </div>
+        <a href="{{route($role . '.courses-all')}}" class="btn btn-primary" type="submit">На страницу курсов</a>
+        <a href="{{route($role .'.courses-testIndex' , $id)}}" class="btn btn-primary" type="submit">Добавить тест</a>
     </div>
+</div>
 
-@endsection
+{{--@endsection/--}}
 

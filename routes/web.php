@@ -37,7 +37,7 @@ Route::prefix('register')->group(function () {
 //CoursesController
 Route::middleware(['auth'])->group(function () {
     Route::prefix('/admin/courses')->group(function () {
-        Route::name('courses-')->group(function () {
+        Route::name('admin.courses-')->group(function () {
             Route::get('/create', 'App\Http\Controllers\Admin\CoursesController@create')->name('create');
             Route::post('/{id}/update', 'App\Http\Controllers\Admin\CoursesController@update')->name('update');
             Route::get('/{id}/edit', 'App\Http\Controllers\Admin\CoursesController@edit')->name('edit');
@@ -63,29 +63,33 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function () {
-        Route::get('users', UsersController::class . '@index')->name('users.index');
-        Route::get('user/create', UsersController::class . '@create')->name('users.create');
-        Route::post('user/store', UsersController::class . '@store')->name('users.store');
-        Route::delete('user/{id}/delete', UsersController::class . '@destroy')->name('users.delete');
-        Route::get('user/{id}/update', UsersController::class . '@edit')->name('users.edit');
-        Route::put('user/{id}/update', UsersController::class . '@update')->name('users.update');
-        Route::get('assignments', AssignmentsController::class . '@index')->name('assignments.index');
-        Route::post('user/{id}/assign', AssignmentsController::class . '@store')->name('assignments.store');
-        Route::delete('assignments/{id}/delete', AssignmentsController::class . '@destroy')->name('assignments.delete');
+        Route::name('admin.users.')->group(function () {
+            Route::get('users', UsersController::class . '@index')->name('index');
+            Route::get('user/create', UsersController::class . '@create')->name('create');
+            Route::post('user/store', UsersController::class . '@store')->name('store');
+            Route::delete('user/{id}/delete', UsersController::class . '@destroy')->name('delete');
+            Route::get('user/{id}/update', UsersController::class . '@edit')->name('edit');
+            Route::put('user/{id}/update', UsersController::class . '@update')->name('update');
+            Route::get('assignments', AssignmentsController::class . '@index')->name('assignments.index');
+            Route::post('user/{id}/assign', AssignmentsController::class . '@store')->name('assignments.store');
+            Route::delete('assignments/{id}/delete', AssignmentsController::class . '@destroy')->name('assignments.delete');
+        });
     });
 });
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('teacher')->group(function () {
-        Route::get('users', UsersController::class . '@index')->name('teacher.users.index');
-        Route::get('assignments', AssignmentsController::class . '@index')->name('teacher.assignments.index');
-        Route::post('user/{id}/assign', AssignmentsController::class . '@store')->name('teacher.assignments.store');
-        Route::delete('assignments/{id}/delete', AssignmentsController::class . '@destroy')->name('teacher.assignments.delete');
+        Route::name('teacher.users.')->group(function () {
+            Route::get('users', UsersController::class . '@index')->name('index');
+            Route::get('assignments', AssignmentsController::class . '@index')->name('assignments.index');
+            Route::post('user/{id}/assign', AssignmentsController::class . '@store')->name('assignments.store');
+            Route::delete('assignments/{id}/delete', AssignmentsController::class . '@destroy')->name('assignments.delete');
+        });
     });
 });
 Route::middleware(['auth'])->group(function () {
     Route::prefix('/teacher/courses')->group(function () {
-        Route::name('teacher-courses-')->group(function () {
+        Route::name('teacher.courses-')->group(function () {
             Route::get('/create', 'App\Http\Controllers\Admin\CoursesController@create')->name('create');
             Route::post('/{id}/update', 'App\Http\Controllers\Admin\CoursesController@update')->name('update');
             Route::get('/{id}/edit', 'App\Http\Controllers\Admin\CoursesController@edit')->name('edit');
@@ -108,7 +112,6 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 });
-
 
 
 Route::get('file/{filePath?}', \App\Http\Controllers\FileController::class . '@getFile')->name('file.get');

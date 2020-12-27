@@ -9,10 +9,13 @@ use App\Models\Users;
 class AssignmentsController extends Controller
 {
     use RolesTrait;
+
+
+
     public function index()
     {
 
-        $usersHasAssign = Assignments::with(['users', 'courses'])->get();
+        $usersHasAssign = Assignments::with(['users', 'courses'])->paginate(5);
 
         return view('admin/assignments', ['assignments' => $usersHasAssign, 'role' => $this->getRole()]);
     }
@@ -36,11 +39,11 @@ class AssignmentsController extends Controller
 
                 ]);
             $assign->save();
-            return redirect(Route('assignments.index'))
+            return redirect(Route($this->getRole() . '.users.assignments.index'))
                 ->with('status', "Назначен курс для пользователя $user->name $user->surname");
         }
 
-        return redirect(Route('users.index'))
+        return redirect(Route($this->getRole() . '.users.index'))
             ->with('status', 'У этого пользователя уже есть данный курс');
 
     }
@@ -55,7 +58,7 @@ class AssignmentsController extends Controller
         } catch (\Exception $e) {
         }
 
-        return redirect(Route('assignments.index'))
+        return redirect(Route($this->getRole() . '.users.assignments.index'))
             ->with(['status' => "Назначение на курс с id $id отменено"]);
     }
 

@@ -1,8 +1,6 @@
 
-
-@extends('admin.layouts.updateUser')
+@extends('admin.courses.content-blocks')
 
 @extends('admin.layouts.navbar')
 
 @extends('layouts.template')
-

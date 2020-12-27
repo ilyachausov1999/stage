@@ -10,9 +10,10 @@
                     </ul>
                 </div>
             @endif
-                <form action="{{ route('users.update', $user->id) }}" method="POST" class="form" enctype="multipart/form-data" >
-                    @csrf
-                    @method('PUT')
+            <form action="{{ route('admin.users.update', $user->id) }}" method="POST" class="form"
+                  enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
 
                 <div class="form-group">
                     <label for="user-login">Логин</label>
@@ -34,8 +35,9 @@
                 <div class="form-group">
                     <label for="user-birthdate">Дата рождения</label>
                     <p>*это поле является обязательным</p>
-{{--                    {{dd(date("d.m.y", strtotime($user['birthdate'])))}}--}}
-                    <input type="date" name="birthdate" value="{{date("d.m.y", strtotime($user['birthdate']))}}" class="form-control " id="user-birthdate">
+                    {{--                    {{dd(date("d.m.y", strtotime($user['birthdate'])))}}--}}
+                    <input type="date" name="birthdate" value="{{date("d.m.y", strtotime($user['birthdate']))}}"
+                           class="form-control " id="user-birthdate">
 
                 </div>
                 <div class="form-group">
@@ -46,28 +48,29 @@
 
                 <div class="form-group">
                     <label for="user-password">Пароль</label>
-                    <input type="password" name="password" maxlength="25" size="40" value="" class="form-control" id="user-password">
+                    <input type="password" name="password" maxlength="25" size="40" value="" class="form-control"
+                           id="user-password">
 
                 </div>
-                    <select name="role">
-                        @foreach($roles as $role)
+                <select name="role">
+                    @foreach($roles as $role)
                         <option value="{{$role->id}}">{{$role->name}}</option>
-                        @endforeach
-                    </select>
+                    @endforeach
+                </select>
                 <div class="form-group">
-{{--                    <label for="user-address">Course</label>--}}
-{{--                    <div class="dropdown">--}}
-{{--                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-{{--                            Назначить курс--}}
-{{--                        </button>--}}
-{{--                        <div class="dropdown-menu">--}}
-{{--                            <li><a class="dropdown-item" href="/">Курс 1</a></li>--}}
-{{--                            <li><a class="dropdown-item" href="#">Курс 2</a></li>--}}
-{{--                            <li><a class="dropdown-item" href="#">Курс 3</a></li>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-                <button class="btn btn-success col-md-3">Отправить</button>
+                    {{--                    <label for="user-address">Course</label>--}}
+                    {{--                    <div class="dropdown">--}}
+                    {{--                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+                    {{--                            Назначить курс--}}
+                    {{--                        </button>--}}
+                    {{--                        <div class="dropdown-menu">--}}
+                    {{--                            <li><a class="dropdown-item" href="/">Курс 1</a></li>--}}
+                    {{--                            <li><a class="dropdown-item" href="#">Курс 2</a></li>--}}
+                    {{--                            <li><a class="dropdown-item" href="#">Курс 3</a></li>--}}
+                    {{--                        </div>--}}
+                    {{--                    </div>--}}
+                    {{--                </div>--}}
+                    <button class="btn btn-success col-md-3">Отправить</button>
             </form>
         </div>
     </div>

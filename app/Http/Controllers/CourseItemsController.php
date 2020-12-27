@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\RolesTrait;
 use Illuminate\Http\Request;
 use App\Models\CourseItems;
 use Illuminate\Http\UploadedFile;
@@ -10,10 +11,12 @@ use Illuminate\Support\Facades\Storage;
 
 class CourseItemsController extends Controller
 {
+
+    use RolesTrait;
     public function index(int $id)
     {
-        $courseItems = CourseItems::query()->with('course')->where('course_id', $id)->get();
-        return view('admin/courses/content-blocks', ['courseItems' => $courseItems, 'id' => $id]);
+        $courseItems = CourseItems::query()->get();
+        return view('admin/content-blocks', ['courseItems' => $courseItems, 'id' => $id, 'role' => $this->getRole()]);
     }
 
     public function store(Request $request, int $id)
@@ -37,7 +40,7 @@ class CourseItemsController extends Controller
 
             $courseItem->save();
 
-            return redirect(Route('courses-index', $id));
+            return redirect(Route($this->getRole() .'.courses-index', $id));
         }else{
             $courseItem = new CourseItems([
                 'description' => $request->get('description'),
@@ -47,7 +50,7 @@ class CourseItemsController extends Controller
 
             $courseItem->save();
 
-            return redirect(Route('courses-index', $id));
+            return redirect(Route($this->getRole() .'.courses-index', $id));
         }
     }
 }
