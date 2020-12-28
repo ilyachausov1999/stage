@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.template')
 @section('content')
 <div class="container">
     <div class="text-center">
