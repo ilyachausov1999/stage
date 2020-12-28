@@ -1,5 +1,6 @@
 
 <div class="container">
+    <h1>Добавить пользователя</h1>
     <div class="card">
         <div class="card-body">
             @if ($errors->any())
@@ -11,7 +12,7 @@
                     </ul>
                 </div>
             @endif
-            <form enctype="multipart/form-data" action="{{ route('users.store') }}" method="POST">
+            <form enctype="multipart/form-data" action="{{ route('admin.users.store') }}" method="POST">
                 @csrf
 
                 <div class="form-group">

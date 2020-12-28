@@ -1,4 +1,5 @@
 <div class="container">
+    <h1>Назначения на курсы:</h1>
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
@@ -12,6 +13,7 @@
             <th>Фамилия</th>
             <th>Название курса</th>
         </tr>
+        {{ $assignments->links('paginate') }}
         @foreach ($assignments as $usersHasAssign)
         </thead>
         <tbody>
@@ -21,7 +23,7 @@
             <td>{{ $usersHasAssign->users['surname'] }}</td>
             <td><p>{{ $usersHasAssign->courses['name'] }}</p>
             <td>
-                <form method="post" action="{{ route('assignments.delete', $usersHasAssign->id) }}">
+                <form method="post" action="{{ route("admin.users.assignments.delete", $usersHasAssign->id) }}">
                     @csrf
                     @method('DELETE')
                     <button onclick="return confirm('Вы уверены, что хотите отменить курс?')"

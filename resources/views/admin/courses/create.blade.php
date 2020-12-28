@@ -1,5 +1,5 @@
 <div class="container">
-    <h3>Добавление курса</h3>
+    <h1>Добавление курса</h1>
     <form action="/admin/courses/submit" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">

@@ -1,36 +1,26 @@
-@extends('layouts.template')
-
-@section('content')
-    <div class = " col-md-2  "  style = "background: white; border-radius: 10px; border: 4px double black;">
-        <ul class="nav col-md-10">
-            <li><a href="{{ route('users.index') }}">Просмотр пользователей</a></li>
-            <li><a href="{{ route('users.create') }}">Добавить пользователя</a></li>
-            <li><a href="{{ route('courses-all') }}">Просмотр  курсов</a></li>
-            <li><a href="{{ route('courses-create') }}">Добавить курс</a></li>
-        </ul>
-    </div>
-    @if ($errors->any())
-        <div class="alert alert-danger" style="width: 800px;" align="center">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
+{{--@section('content')--}}
 <div class="container">
 
-
-    <div  class = "col-xs-12 col-md-2" >
+    <h3>Создать тест</h3>
+    <div class="col-xs-12 col-md-2">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
 
     </div>
 
     <div>
-             <h3>Создать тест</h3>
-        <div  style="width: 100%">
-            <form method="POST" onsubmit="return" enctype="multipart/form-data" id="form" action="{{ route('courses-testStore', $id) }}">
+        <h3>Создать тест</h3>
+        <div style="width: 100%">
+            <form method="POST" enctype="multipart/form-data" id="form"
+                  action="{{ route('admin.courses-testStore', $id) }}">
                 @csrf
 
                 <div class="form-group">
@@ -127,4 +117,4 @@
             </script>
 
 </div>
-@endsection
+{{--@endsection--}}

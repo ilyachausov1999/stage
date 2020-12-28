@@ -7,6 +7,7 @@ use App\Http\Requests\CreateTestRequest;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Test;
+use App\Traits\RolesTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -14,12 +15,13 @@ use Illuminate\Support\Facades\Storage;
 
 class TestsController
 {
+    use RolesTrait;
 
 
     public function testIndex(int $id)
     {
         $courseItemTest = Test::query()->with('courses')->where('course_id', $id)->get();
-        return view('admin/courses/allTests', ['courseItemTest' => $courseItemTest, 'id' => $id]);
+        return view('admin/allTests', ['courseItemTest' => $courseItemTest, 'id' => $id, 'role' => $this->getRole()]);
     }
 
     public function show($id)
@@ -27,13 +29,13 @@ class TestsController
 
         $test = Test::with(['questions.answers'])->find($id);
 
-        return view('admin/courses/showTest', ['test' => $test]);
+        return view('admin/showTest', ['test' => $test, 'role' => $this->getRole()]);
     }
 
     public function testEdit($id)
     {
         $test = Test::with(['questions.answers'])->find($id);
-        return view('admin/courses/testEdit', ['test' => $test ]);
+        return view('admin/testEdit', ['test' => $test, 'role' => $this->getRole() ]);
     }
 
     public function testUpdate(Request $request, $id)
@@ -72,12 +74,12 @@ class TestsController
                     $isCorrect1 = 0;
                 }
                 Answer::find($answerId)->update(['answer' => $request->get('answers-' . $answerId),
-                                                  'is_correct' => $isCorrect1 ]);
+                    'is_correct' => $isCorrect1 ]);
             }
 
         }
 
-        return redirect(Route('courses-testIndex', $test->course_id))->with('success', 'Тест обновлён!');
+        return redirect(Route('admin.courses-testIndex', $test->course_id))->with('success', 'Тест обновлён!');
     }
 
     public function destroy($id)
@@ -96,13 +98,13 @@ class TestsController
 
         $test->delete();
 
-        return redirect(Route('courses-testIndex', $test->course_id))->with('success', 'Тест удалён');
+        return redirect(Route('admin.courses-testIndex', $test->course_id))->with('success', 'Тест удалён');
     }
 
     public function testCreate(int $id)
     {
         $courseItemTest = Test::query()->with('courses')->where('course_id', $id)->get();
-        return view('admin/courses/test-block', ['courseItemTest' => $courseItemTest, 'id' => $id]);
+        return view('admin/test-block', ['courseItemTest' => $courseItemTest, 'id' => $id, 'role' => $this->getRole()]);
     }
 
     public function testStore(CreateTestRequest $request, int $id)
@@ -174,6 +176,6 @@ class TestsController
             throw $e;
         }
 
-        return redirect(Route('courses-testIndex', $id));
+        return redirect(Route('admin.courses-testIndex', $id));
     }
 }
