@@ -21,7 +21,16 @@
             <li><a href="{{ route('courses-create') }}">Добавить курс</a></li>
         </ul>
     </div>
-
+    <div class="col-lg-6 mx-auto">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
     <div class="container">
 
