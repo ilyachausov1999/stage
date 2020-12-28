@@ -27,7 +27,7 @@
                     @csrf
                     @method('DELETE')
                     <button onclick="return confirm('Вы уверены, что хотите отменить курс?')"
-                            class="btn btn-sm btn-danger col-md-8">Отменить курс
+                            class="btn btn-sm btn-danger col-md-6">Отменить курс
                     </button>
                 </form>
             </td>

@@ -12,6 +12,6 @@
             <h5>* максимальный размер изображения 1мб</h5>
         </div>
         @include('errors.errors')
-        <input type="submit" name="submit" value="Сохранить" class="btn btn-success btn-lg">
+        <input type="submit" name="submit" value="Сохранить" class="btn btn-sm btn-success btn-lg">
     </form>
 </div>

@@ -46,26 +46,27 @@
                         <td>
                             @if($role == 'teacher')
                                 <a href="{{ route('admin.courses-index', $value->id) }}"
-                                   class="btn btn-success btn-lg">Добавить блок</a>
-                                <a href="{{ route('admin.courses-view', $value->id) }}" class="btn btn-info btn-lg">Просмотр</a>
+                                   class="btn btn-sm btn-success col-md-3">Добавить блок</a>
+                                <a href="{{ route('admin.courses-view', $value->id) }}"
+                                   class="btn btn-sm btn-info col-md-3">Просмотр</a>
                                 <a href="{{ route('admin.courses-edit', $value->id) }}"
-                                   class="btn btn-primary btn-lg">Изменить</a>
+                                   class="btn btn-sm btn-primary col-md-3">Изменить</a>
                                 <a href="{{ route('admin.courses-delete', $value->id) }}"
-                                   class="btn btn-danger btn-lg">Удалить</a>
+                                   class="btn btn-sm  btn-danger col-md-3">Удалить</a>
                             @endif
                             @if($role == 'admin')
                                 <a href="{{ route('admin.courses-index', $value->id) }}"
-                                   class="btn btn-success btn-lg">Добавить блок</a>
+                                   class="btn btn-sm btn-success col-md-3">Добавить блок</a>
                                 <a href="{{ route('admin.courses-view', $value->id) }}"
-                                   class="btn btn-info btn-lg">Просмотр</a>
+                                   class="btn btn-sm btn-info col-md-3">Просмотр</a>
                                 <a href="{{ route('admin.courses-edit', $value->id) }}"
-                                   class="btn btn-primary btn-lg">Изменить</a>
+                                   class="btn btn-sm btn-primary col-md-3">Изменить</a>
                                 <a href="{{ route('admin.courses-delete', $value->id) }}"
-                                   class="btn btn-danger btn-lg">Удалить</a>
+                                   class="btn btn-sm btn-danger col-md-3">Удалить</a>
                             @endif
                             @if($role == 'user')
                                 <a href="{{ route('admin.courses-view', $value->id) }}"
-                                   class="btn btn-info btn-lg">Просмотр</a>
+                                   class="btn btn-sm btn-info btn-lg">Просмотр</a>
                             @endif
                         </td>
                     </tr>

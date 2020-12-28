@@ -55,7 +55,7 @@
                                         <option value="{{$course->id}}">{{$course->name}}</option>
                                     @endforeach
                                 </select>
-                                <button>Отправить</button>
+                                <button class="btn btn-success col-md-" >Отправить</button>
                             </form>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                 <td>{{ $userView->email }}</td>
                 <td>
                     <div class="dropdown">
-                        <button class="btn btn-sm btn-success dropdown-toggle col-md-8" type="button"
+                        <button class="btn btn-sm btn-success dropdown-toggle col-md-6" type="button"
                                 id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
                             Назначить курс
@@ -103,7 +103,7 @@
                                         <option value="{{$course->id}}">{{$course->name}}</option>
                                     @endforeach
                                 </select>
-                                <button>Отправить</button>
+                                <button class="btn btn-success col-md-1" >Отправить</button>
                             </form>
                         </div>
                     </div>
