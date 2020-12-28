@@ -21,16 +21,16 @@
 
 <div class="container">
 
-             <h3>Создать тест</h3>
+
     <div  class = "col-xs-12 col-md-2" >
 
 
     </div>
 
     <div>
-             <h3>Добавить блок-тест</h3>
+             <h3>Создать тест</h3>
         <div  style="width: 100%">
-            <form method="POST" enctype="multipart/form-data" id="form" action="{{ route('courses-testStore', $id) }}">
+            <form method="POST" onsubmit="return" enctype="multipart/form-data" id="form" action="{{ route('courses-testStore', $id) }}">
                 @csrf
 
                 <div class="form-group">
@@ -45,10 +45,20 @@
         </div>
     </div>
             <script>
+                document.getElementById('form').onsubmit = function() {
+                    if(n > 0 && m > 0){
+                        return true;
+                    }else{
+                        alert('Добавьте поля Вопрос и Ответ!');
+                        return false;
+                    }
+                }
+
                 let n = 0;
                 function add_question(){
                     n = n + 1;
                     var name = "Вопрос" + n;
+                    var name_img = 'Изображение';
                     var y = document.getElementById("form");
                     var new_label = document.createElement("label");
                     new_label.setAttribute("for", "content-title");
@@ -65,6 +75,20 @@
                     var pos = y.childElementCount;
                     y.insertBefore(new_field, y.childNodes[pos]);
 
+                    var new_label_img = document.createElement("label");
+                    new_label_img.setAttribute("for", "content-title");
+                    new_label_img.setAttribute("id", "label_img" + n);
+                    var pos4 = y.childElementCount;
+                    y.insertBefore(new_label_img, y.childNodes[pos4]);
+                    var label_img = document.getElementById("label_img" + n);
+                    label_img.insertAdjacentHTML('afterbegin' , name_img);
+
+                    var new_field_img = document.createElement("input");
+                    new_field_img.setAttribute("type", "file");
+                    new_field_img.setAttribute("name", "questions[" + n + "][name]");
+                    new_field_img.setAttribute("class", "form-control");
+                    var pos5 = y.childElementCount;
+                    y.insertBefore(new_field_img, y.childNodes[pos5]);
 
                     var z = 0;
                     z = z + 1;
@@ -100,7 +124,6 @@
                     var pos = y.childElementCount;
                     y.insertBefore(new_field, y.childNodes[pos]);
                 }
-
             </script>
 
 </div>

@@ -1,4 +1,9 @@
 <div class="container">
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
     <table class="table table-striped ">
         <thead>
         <tr>
@@ -34,7 +39,7 @@
                         Назначить курс
                     </button>
                     <div class="dropdown-menu">
-                            <form  enctype="multipart/form-data" action="{{ route('assignments.store', $userView->id) }}" method="POST">
+                            <form name="course"  enctype="multipart/form-data" action="{{ route('assignments.store', $userView->id) }}" method="POST">
                                 @csrf
                                 <select name="course">
                                     @foreach($courses as $course)
