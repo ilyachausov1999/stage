@@ -19,8 +19,8 @@ class CourseItemsController extends Controller
     public function store(Request $request, int $id)
     {
         $request->validate([
-            'description'   => 'required',
-            'text'          => 'required',
+            'description'   => 'required|string|max:255',
+            'text'          => 'required|text',
             'image'         =>  'image|max:2048'
         ]);
         /**
