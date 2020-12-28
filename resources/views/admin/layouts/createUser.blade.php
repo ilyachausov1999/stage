@@ -1,5 +1,6 @@
 
 <div class="container">
+    <h1>Добавить пользователя</h1>
     <div class="card">
         <div class="card-body">
             @if ($errors->any())
