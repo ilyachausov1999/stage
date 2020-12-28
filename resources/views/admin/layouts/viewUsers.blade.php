@@ -96,7 +96,7 @@
                         </button>
                         <div class="dropdown-menu">
                             <form name="course" enctype="multipart/form-data"
-                                  action="{{ route($role .'.users.assignments.store', $userView->id) }}" method="POST">
+                                  action="{{ route('admin.users.assignments.store', $userView->id) }}" method="POST">
                                 @csrf
                                 <select name="course">
                                     @foreach($courses as $course)

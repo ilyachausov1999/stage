@@ -35,8 +35,7 @@
                 <div class="form-group">
                     <label for="user-birthdate">Дата рождения</label>
                     <p>*это поле является обязательным</p>
-                    {{--                    {{dd(date("d.m.y", strtotime($user['birthdate'])))}}--}}
-                    <input type="date" name="birthdate" value="{{date("d.m.y", strtotime($user['birthdate']))}}"
+                    <input type="date" name="birthdate" value="{{date("y.m.d", strtotime($user['birthdate']))}}"
                            class="form-control " id="user-birthdate">
 
                 </div>

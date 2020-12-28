@@ -38,13 +38,13 @@ class CoursesController extends Controller
                 'image'   =>   $path
             ]);
 
-            return redirect()->route($this->getRole() . '.courses-all');
+            return redirect()->route('admin.courses-all');
         } else {
             Courses::query()->create([
                 'name'    =>   $req->name
             ]);
         }
-        return redirect()->route($this->getRole() . '.courses-all');
+        return redirect()->route('admin.courses-all');
     }
 
     public function getAll()
@@ -65,7 +65,7 @@ class CoursesController extends Controller
     public function delete($id)
     {
         Courses::find($id)->delete();
-        return redirect()->route($this->getRole() . '.courses-all');
+        return redirect()->route('admin.courses-all');
     }
 
     public function view($id)
@@ -92,13 +92,13 @@ class CoursesController extends Controller
                 'image'      =>   $path
             );
             Courses::whereId($id)->update($data);
-            return redirect()->route($this->getRole() . '.courses-all');
+            return redirect()->route('admin.courses-all');
         } else {
             $data = array(
                 'name'       =>   $req->name,
             );
             Courses::whereId($id)->update($data);
         }
-        return redirect()->route($this->getRole() . '.courses-all');
+        return redirect()->route('admin.courses-all');
     }
 }

@@ -52,7 +52,7 @@ class UsersController extends Controller
 
         ]);
         if ($validator->fails()) {
-            return redirect(Route($this->getRole() . '.users.create'))
+            return redirect(Route( 'admin.users.create'))
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -69,7 +69,7 @@ class UsersController extends Controller
         ]);
 
         $user->save();
-        return redirect(Route($this->getRole() . '.users.index'));
+        return redirect(Route( 'admin.users.index'));
 
     }
 
@@ -84,7 +84,7 @@ class UsersController extends Controller
 
         $user->delete();
 
-        return redirect(route($this->getRole() . '.users.index'))
+        return redirect(Route( 'admin.users.index'))
             ->with('status', "Удален пользователь $user->name $user->surname");
     }
 
@@ -112,7 +112,7 @@ class UsersController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect(Route($this->getRole() . '.users.edit', $user))
+            return redirect(Route( 'admin.users.edit', $user))
                 ->withErrors($validator);
         }
 
@@ -128,7 +128,7 @@ class UsersController extends Controller
         $user->password = Hash::make($request->get('password'));
         $user->role_id = $request->get('role');
         $user->save();
-        return redirect(Route($this->getRole() . '.users.index'));
+        return redirect(Route( 'admin.users.index'));
 
     }
 }

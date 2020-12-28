@@ -10,7 +10,7 @@
                     </ul>
                 </div>
             @endif
-            <form method="POST" action="{{ route($role .'.courses-testUpdate', $test) }}">
+            <form method="POST" action="{{ route('admin.courses-testUpdate', $test) }}">
                 @csrf
                 @method('PATCH')
                 <form method="post" enctype="multipart/form-data" action="">

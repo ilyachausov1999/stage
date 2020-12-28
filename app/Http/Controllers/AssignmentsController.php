@@ -39,11 +39,11 @@ class AssignmentsController extends Controller
 
                 ]);
             $assign->save();
-            return redirect(Route($this->getRole() . '.users.assignments.index'))
+            return redirect(Route( 'admin.users.assignments.index'))
                 ->with('status', "Назначен курс для пользователя $user->name $user->surname");
         }
 
-        return redirect(Route($this->getRole() . '.users.index'))
+        return redirect(Route( 'admin.users.index'))
             ->with('status', 'У этого пользователя уже есть данный курс');
 
     }
@@ -58,7 +58,7 @@ class AssignmentsController extends Controller
         } catch (\Exception $e) {
         }
 
-        return redirect(Route($this->getRole() . '.users.assignments.index'))
+        return redirect(Route( 'admin.users.assignments.index'))
             ->with(['status' => "Назначение на курс с id $id отменено"]);
     }
 

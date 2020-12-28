@@ -31,7 +31,7 @@
             Добавить контентый блок
         </button>
         <div class="dropdown-menu" style="width: 100%">
-                <form method="POST" enctype="multipart/form-data" action="{{ route($role .'.courses-store', $id) }}">
+                <form method="POST" enctype="multipart/form-data" action="{{ route('admin.courses-store', $id) }}">
                     @csrf
 
                     <div class="form-group">
@@ -73,8 +73,8 @@
                 </form>
 
         </div>
-        <a href="{{route($role . '.courses-all')}}" class="btn btn-primary" type="submit">На страницу курсов</a>
-        <a href="{{route($role .'.courses-testIndex' , $id)}}" class="btn btn-primary" type="submit">Добавить тест</a>
+        <a href="{{route('admin.courses-all')}}" class="btn btn-primary" type="submit">На страницу курсов</a>
+        <a href="{{route('admin.courses-testIndex' , $id)}}" class="btn btn-primary" type="submit">Добавить тест</a>
     </div>
 </div>
 

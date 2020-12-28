@@ -15,7 +15,7 @@ class CourseItemsController extends Controller
     use RolesTrait;
     public function index(int $id)
     {
-        $courseItems = CourseItems::query()->get();
+        $courseItems = CourseItems::query()->with('course')->where('course_id', $id)->get();
         return view('admin/content-blocks', ['courseItems' => $courseItems, 'id' => $id, 'role' => $this->getRole()]);
     }
 
@@ -40,7 +40,7 @@ class CourseItemsController extends Controller
 
             $courseItem->save();
 
-            return redirect(Route($this->getRole() .'.courses-index', $id));
+            return redirect(Route('admin.courses-index', $id));
         }else{
             $courseItem = new CourseItems([
                 'description' => $request->get('description'),
@@ -50,7 +50,7 @@ class CourseItemsController extends Controller
 
             $courseItem->save();
 
-            return redirect(Route($this->getRole() .'.courses-index', $id));
+            return redirect(Route('admin.courses-index', $id));
         }
     }
 }

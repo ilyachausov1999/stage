@@ -1,6 +1,6 @@
 <div class="container">
     <h3>Редактировать:</h3>
-    <form method="post" enctype="multipart/form-data" action="{{ route($role .'.courses-update', $data->id)}}">
+    <form method="post" enctype="multipart/form-data" action="{{ route('admin.courses-update', $data->id)}}">
         @csrf
         <div class="form-group">
             <label>Название</label>

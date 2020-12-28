@@ -19,10 +19,6 @@ trait RolesTrait
 
         foreach ($role as $userRole) {
 
-//            if ($userRole->role['name'] == 'admin'){
-//                return $role = 'admin';
-//            }
-
             return $userRole->role['name'];
         }
     }

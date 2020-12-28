@@ -23,7 +23,7 @@
             <td>{{ $usersHasAssign->users['surname'] }}</td>
             <td><p>{{ $usersHasAssign->courses['name'] }}</p>
             <td>
-                <form method="post" action="{{ route("$role.users.assignments.delete", $usersHasAssign->id) }}">
+                <form method="post" action="{{ route("admin.users.assignments.delete", $usersHasAssign->id) }}">
                     @csrf
                     @method('DELETE')
                     <button onclick="return confirm('Вы уверены, что хотите отменить курс?')"

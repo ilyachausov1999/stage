@@ -20,7 +20,7 @@
         <h3>Создать тест</h3>
         <div style="width: 100%">
             <form method="POST" enctype="multipart/form-data" id="form"
-                  action="{{ route($role .'.courses-testStore', $id) }}">
+                  action="{{ route('admin.courses-testStore', $id) }}">
                 @csrf
 
                 <div class="form-group">
