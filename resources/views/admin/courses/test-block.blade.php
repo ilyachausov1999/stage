@@ -85,7 +85,7 @@
 
                     var new_field_img = document.createElement("input");
                     new_field_img.setAttribute("type", "file");
-                    new_field_img.setAttribute("name", "questions[" + n + "][name]");
+                    new_field_img.setAttribute("name", "questions[" + n + "][image]");
                     new_field_img.setAttribute("class", "form-control");
                     var pos5 = y.childElementCount;
                     y.insertBefore(new_field_img, y.childNodes[pos5]);
