@@ -26,7 +26,7 @@
 
     <div class="dropdown">
 
-        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
             Добавить контентый блок
         </button>
@@ -69,12 +69,12 @@
                     </div>
 
 
-                    <button class="btn btn-success" type="submit">Добавить блок</button>
+                    <button class="btn btn-sm btn-success" type="submit">Добавить блок</button>
                 </form>
 
         </div>
-        <a href="{{route('admin.courses-all')}}" class="btn btn-primary" type="submit">На страницу курсов</a>
-        <a href="{{route('admin.courses-testIndex' , $id)}}" class="btn btn-primary" type="submit">Добавить тест</a>
+        <a href="{{route('admin.courses-all')}}" class="btn btn-sm btn-primary" type="submit">На страницу курсов</a>
+        <a href="{{route('admin.courses-testIndex' , $id)}}" class="btn btn-sm btn-primary" type="submit">Добавить тест</a>
     </div>
 </div>
 

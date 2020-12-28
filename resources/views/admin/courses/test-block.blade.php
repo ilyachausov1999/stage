@@ -28,9 +28,9 @@
                     <input type="text" name="name" value="" class="form-control " id="content-title">
                 </div>
 
-                <button class="btn btn-success" type="button" onclick="add_question()">Добавить вопрос</button>
-                <button class="btn btn-success" type="button" onclick="add_answer()">Добавить ответ</button>
-                <button class="btn btn-success" type="submit">Сохранить</button>
+                <button class="btn btn-sm btn-success" type="button" onclick="add_question()">Добавить вопрос</button>
+                <button class="btn btn-sm btn-success" type="button" onclick="add_answer()">Добавить ответ</button>
+                <button class="btn btn-sm btn-success" type="submit">Сохранить</button>
             </form>
         </div>
     </div>

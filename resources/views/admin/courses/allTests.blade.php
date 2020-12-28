@@ -1,5 +1,5 @@
 <div class="container">
-    <a href="{{route( 'admin.courses-testCreate' , $id)}}" class="btn btn-success" style="align-self: ">Добавить
+    <a href="{{route( 'admin.courses-testCreate' , $id)}}" class="btn btn-sm btn-success ">Добавить
         тест</a>
     @if(session()->get('success'))
         <div class="alert alert-success mt-3">
@@ -24,12 +24,12 @@
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->created_at }}</td>
                 <td class="table-buttons">
-                    <a href="{{ route('admin.courses-show', $item) }}" class="btn btn-success">Показать</a>
-                    <a href="{{ route('admin.courses-testEdit', $item) }}" class="btn btn-primary">Редактировать</a>
+                    <a href="{{ route('admin.courses-show', $item) }}" class="btn btn-sm btn-success col-md-3">Показать</a>
+                    <a href="{{ route('admin.courses-testEdit', $item) }}" class="btn btn-sm btn-primary col-md-3">Редактировать</a>
                     <form method="post" action="{{ route( 'admin.courses-destroy', $item->id) }}">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Удалить</button>
+                        <button type="submit" class="btn btn-sm btn-danger col-md-3">Удалить</button>
                     </form>
                 </td>
             </tr>

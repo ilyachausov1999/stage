@@ -13,7 +13,7 @@
     </div>
     @endforeach
     <div class="text-center">
-        <a href="{{ route('custom-courses') }}" class="btn btn-primary" type="submit">Вернуться к курсам</a>
+        <a href="{{ route('custom-courses') }}" class="btn btn-sm btn-primary" type="submit">Вернуться к курсам</a>
     </div>
 </div>
 @endsection
