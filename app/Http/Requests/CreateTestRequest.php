@@ -25,18 +25,20 @@ class CreateTestRequest extends FormRequest
     {
         return [
             'name' => 'required|min:5|max:255|string',
-            'questions' => 'required|array',
+            'questions.*.name' => 'required',
             'questions.*.answers.*.answer' => 'required',
             'image'    =>  'image|max:2048'
         ];
     }
 
-//    public function messages()
-//    {[
-//        'name.required' => 'Название теста обязательно',
-//        'questions.required' => 'Вопрос обязателен',
-//        'questions.*.answers.required' => 'Ответы обязателен'
-//    ];
-//    }
+    public function messages()
+    {
+        return
+        [
+        'name.required' => 'Название теста обязательно',
+        'questions.*.name.required' => 'Вопрос не может быть пустым',
+        'questions.*.answers.*.answer.required' => 'Ответ не может быть пустым'
+    ];
+    }
 
 }

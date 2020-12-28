@@ -24,9 +24,10 @@
                                 <h4>Название вопроса : <input type="text" name="questions-{{$question->getKey()}}" value="{{ $question->question}}" class="form-control" id="question"></h4>
                                 @foreach($question->answers as $answer)
                                     <h5>Вариант ответа  :  <input type="text" name="answers-{{$answer->getKey()}}" value="{{ $answer->answer }}" class="form-control" id="answer">
-                                        <input type="checkbox" name="is_correct-{{$answer->getKey()}}"  class="form-check-input">
+
                                         @if ( $answer->is_correct == 1 )
-                                             Правильный ответ
+                                            <input type="checkbox" name="is_correct-{{$answer->getKey()}}"  class="form-check-input" checked> Правильный ответ
+                                        @else <input type="checkbox" name="is_correct-{{$answer->getKey()}}"  class="form-check-input">
                                         @endif
                                     </h5>
                                 @endforeach
