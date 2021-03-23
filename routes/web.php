@@ -90,5 +90,8 @@ Route::prefix('courses')->name('custom-')->group(function () {
     Route::get('/{id}', 'App\Http\Controllers\Users\CustomController@view')->name('view');
     Route::middleware(['auth'])->group(function () {
         Route::get('{id}/block', 'App\Http\Controllers\Users\CustomController@show')->name('block');
+        Route::get('{id}/tests/show', 'App\Http\Controllers\Users\UserTestsController@show')->name('show');
+        Route::get('{id}/test/pass', 'App\Http\Controllers\Users\UserTestsController@passTest')->name('pass');
+        Route::post('{id}/test/result', 'App\Http\Controllers\Users\UserTestsController@testResult')->name('result');
     });
 });

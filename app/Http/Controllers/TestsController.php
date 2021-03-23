@@ -17,7 +17,6 @@ class TestsController
 {
     use RolesTrait;
 
-
     public function testIndex(int $id)
     {
         $courseItemTest = Test::query()->with('courses')->where('course_id', $id)->get();
@@ -26,11 +25,11 @@ class TestsController
 
     public function show($id)
     {
-
         $test = Test::with(['questions.answers'])->find($id);
-
         return view('admin/showTest', ['test' => $test, 'role' => $this->getRole()]);
     }
+
+
 
     public function testEdit($id)
     {
@@ -40,9 +39,6 @@ class TestsController
 
     public function testUpdate(Request $request, $id)
     {
-
-
-
         $test = Test::with(['questions.answers'])->find($id);
         $request->validate([
             'name' => 'required',
@@ -76,9 +72,7 @@ class TestsController
                 Answer::find($answerId)->update(['answer' => $request->get('answers-' . $answerId),
                     'is_correct' => $isCorrect1 ]);
             }
-
         }
-
         return redirect(Route('admin.courses-testIndex', $test->course_id))->with('success', 'Тест обновлён!');
     }
 

@@ -14,6 +14,7 @@
     @endforeach
     <div class="text-center">
         <a href="{{ route('custom-courses') }}" class="btn btn-sm btn-primary" type="submit">Вернуться к курсам</a>
+        <a href="{{route('custom-show', $id)}}" class="btn btn-sm btn-primary btn-lg">Пройти тестирование</a>
     </div>
 </div>
 @endsection
