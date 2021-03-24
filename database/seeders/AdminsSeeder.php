@@ -24,4 +24,5 @@ class AdminsSeeder extends Seeder
 
 ], ['login', 'name', 'surname', 'email', 'password', 'remember_token'], ['role_id']);
     }
+
 }
