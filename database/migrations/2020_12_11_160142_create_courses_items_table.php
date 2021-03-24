@@ -17,7 +17,7 @@ class CreateCoursesItemsTable extends Migration
             $table->id();
             $table->string('description');
             $table->string('text');
-            $table->foreignId('course_id');
+            $table->foreignId('course_id'); //убрать default
             $table->foreign('course_id')->references('id')->on('courses');
             $table->timestamp('created_at');
             $table->string('updated_at');
